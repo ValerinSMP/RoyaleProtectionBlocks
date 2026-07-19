@@ -23,9 +23,9 @@
 hs_err_pid*
 replay_pid*
 
+!lib/*.jar
 target/
 bin/
 dependency-reduced-pom.xml
-.classpath
 .project
 .settings/
