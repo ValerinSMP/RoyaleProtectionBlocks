@@ -1,0 +1,9 @@
+# Optional public map hook. No players, owners or protection-block positions are published.
+enabled: true
+layer-name: Protecciones
+worlds:
+  - world
+refresh-seconds: 30
+markers-per-tick: 25
+exclude-protection-ids: []
+debug: false

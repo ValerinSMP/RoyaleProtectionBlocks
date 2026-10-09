@@ -1,43 +1,49 @@
-Title: "Player Settings"
-Size: 27
+Title: "Ajustes personales"
+Size: 54
 Messages:
   Invitation-requirement:
-    All-accepted: "All invitations accepted"
-    All-denied: "All invitations denied"
-    Invitation-required: "Invitation required"
+    All-accepted: "Aceptar todas"
+    All-denied: "Rechazar todas"
+    Invitation-required: "Solicitar invitación"
   Common:
-    Enabled: "&aEnabled"
-    Disabled: "&cDisabled"
+    Enabled: "&#00FB9AActivado"
+    Disabled: "&#FF3300Desactivado"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-26"
+    Slots: "0-3;5-8;45-48;50-53"
   Player-info:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&e{player_name}"
-    Slots: "10"
+      Name: "&#FFD166{player_name}"
+    Slots: "4"
   Auto-flight-button:
     Display-item:
       Type: "FEATHER"
       Amount: 1
-      Name: "&eAuto-flight &8[&7{autoflight_value}&8]"
-    Slots: "13"
+      Name: "&#FFD166Vuelo automático: &f{autoflight_value}"
+      Lore:
+      - "&7Activa el vuelo al entrar en"
+      - "&7una protección compatible."
+    Slots: "21"
   Invitation-requirement-button:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eInvitation requirement &8[&b{invitationrequirement_value}&8]"
+      Name: "&#FFD166Solicitar invitaciones: &f{invitationrequirement_value}"
+      Lore:
+      - "&7Decide si otros jugadores deben"
+      - "&7invitarte antes de añadirte."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQ1ZmQxNzRmMjUwMzdiN2Y5ZWNhNzMzY2ZkMDQ2YThiNjM1MTEyMDI2NDg1MzcwNWJjYWE1YjYzZTE3YzE3In19fQ=="
-    Slots: "16"
-  Back-button:
+    Slots: "23"
+  Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&cBack"
+      Name: "&#FF3300✘ Cerrar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+    Slots: "49"

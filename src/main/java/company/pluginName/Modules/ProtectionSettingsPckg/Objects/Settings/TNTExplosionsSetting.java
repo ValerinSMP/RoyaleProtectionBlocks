@@ -12,10 +12,9 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Enums.PermissionGroup;
 public class TNTExplosionsSetting extends BooleanSettingImpl {
 
 	public TNTExplosionsSetting() {
-		super("tnt-explosions", true, null, null, "TNT explosions allowed", true, null, null, null,
-				ItemBuilder.inst().setMaterial(Material.TNT).setName("&eCan TNT explode on your protection? {value}")
-						.setLore(Arrays.asList("&7Define if TNT can explode",
-								"&7to your protection. This only prevents", "&7blocks from being destroyed."))
+		super("tnt-explosions", true, null, null, "Explosiones de TNT", true, null, null, null,
+				ItemBuilder.inst().setMaterial(Material.TNT).setName("&#FFD166Explosiones de TNT: &f{value}")
+						.setLore(Arrays.asList("&7Define si la TNT puede destruir", "&7bloques dentro de la protección."))
 						.build());
 	}
 

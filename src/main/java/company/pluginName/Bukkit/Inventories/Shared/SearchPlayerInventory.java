@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -19,8 +20,9 @@ import darkpanda73.PandaUtils.Services.PandaCachedPlayersModule.Objects.PandaCac
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaPrefixedStringField;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
-import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Utils.ItemUtilities;
 import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Exceptions.PlayerAlreadyListeningException;
 import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Services.PandaMessageListenerService;
 
@@ -65,7 +67,7 @@ public class SearchPlayerInventory extends PagedChestInventoryObject<PandaCached
 		String name = getChestInventoryData().getEntityName() != null
 				&& !getChestInventoryData().getEntityName().isEmpty() ? getChestInventoryData().getEntityName() : null;
 
-		return processPlayerHead(ItemBuilder.inst().fromItem(ItemUtilities.createPlayerHead()).setName(name)
+		return processPlayerHead(ItemBuilder.inst().fromItem(new ItemStack(Material.PLAYER_HEAD)).setName(name)
 				.setReplacements(new Replacement("{playername}", () -> entity.getName())), entity.getUuid());
 	}
 
@@ -75,9 +77,19 @@ public class SearchPlayerInventory extends PagedChestInventoryObject<PandaCached
 		action.accept(entity);
 	}
 
+	@ItemExecutor("Back-button")
+	private void onClickBack() {
+		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
 	@ItemExecutor("Close-button")
 	private void onClickClose() {
-		goToPreviousInventory();
+		closeInventory();
 	}
 
 	@ItemExecutor("Search-specific-player")

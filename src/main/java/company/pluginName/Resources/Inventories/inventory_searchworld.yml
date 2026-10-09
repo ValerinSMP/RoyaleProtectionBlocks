@@ -1,48 +1,60 @@
-Title: "Select a world"
+Title: "Seleccionar mundo ({current_page}/{max_page})"
 Size: 54
 Messages:
-  World-search-info: "&7Type the name of the world you're looking for. Type 'cancel' to cancel this action."
-  Already-in-prompt: "&cYou've already a pending type operation! Type 'cancel' to cancel the previous operation."
-  World-not-found: "&cThe specified world couldn't be found!"
+  World-search-info: "&7Escribe el nombre del mundo. Escribe 'cancel' para salir."
+  Already-in-prompt: "&#FFC43BYa tienes una búsqueda pendiente. Escribe 'cancel' para detenerla."
+  World-not-found: "&#FF3300No se encontró ese mundo."
 Entity:
   Type: "PLAYER_HEAD"
   Amount: 1
-  Name: "&e{worldname}"
+  Name: "&#FFD166{worldname}"
   Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY5MTk2YjMzMGM2Yjg5NjJmMjNhZDU2MjdmYjZlY2NlNDcyZWFmNWM5ZDQ0Zjc5MWY2NzA5YzdkMGY0ZGVjZSJ9fX0="
-  Slots: "0-44"
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "45-53"
+    Slots: "0-8;45-53"
+  Menu-info:
+    Display-item:
+      Type: "GRASS_BLOCK"
+      Amount: 1
+      Name: "&#FFD166Seleccionar mundo"
+    Slots: "4"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "45"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "53"
+    Slots: "50"
   Search-specific-world: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eSearch for an specific world"
+      Name: "&#FFD166Buscar mundo"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMzNWU4Njg0YzdmNzc2YmVmZWRjNDMxOWQwODE0OGM1NGJlYTM5MzIxZTFiZDVkZWY3YTU1Yjg5ZmRhYTA5OSJ9fX0="
-    Slots: "50"
+    Slots: "53"
     Version: 2
-  Close-button: 
+  Back-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FFD166← Volver"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "48"
+    Slots: "45"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

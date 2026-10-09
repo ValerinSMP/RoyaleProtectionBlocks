@@ -1,125 +1,138 @@
-Title: "Settings > Messages"
-Size: 27
+Title: "Mensajes de la protección"
+Size: 54
 Messages:
-  Message-specify-info: "&7Type each line you want to set on your message. You can use the following placeholders &f{placeholders_tooltip} &7to add automatic information on your messages. Type '.' once you have specified every line. Type 'cancel' to cancel this action."
-  Action-bar-specify-info: "&7Type the text you want to be shown on your action bar. You can use the following placeholders &f{placeholders_tooltip} &7to add automatic information on your messages. Type 'cancel' to cancel this action."
-  Title-specify-info: "&7Type the title you want to be shown on the screen. You can use the following placeholders &f{placeholders_tooltip} &7to add automatic information on your messages. Type 'cancel' to cancel this action."
-  Subtitle-specify-info: "&7Type the subtitle you want to be shown on the screen. You can use the following placeholders &f{placeholders_tooltip} &7to add automatic information on your messages. Type 'cancel' to cancel this action."
-  Boss-bar-specify-info: "&7Type the text you want to be shown on the boss bar. You can use the following placeholders &f{placeholders_tooltip} &7to add automatic information on your messages. Type 'cancel' to cancel this action."
-  Placeholders-tooltip: "🛈"
-  Exceeded-maximum-characters: "&cThe specified message will actually exceed the maximum amount of characters! &8(&e{current_characters}&7/&a{maximum_characters}&8)"
+  Message-specify-info: "&7Escribe cada línea del mensaje. Usa &f{placeholders_tooltip} &7para datos automáticos, '.' para terminar o 'cancel' para salir."
+  Action-bar-specify-info: "&7Escribe el texto de la barra de acción. Usa &f{placeholders_tooltip} &7para datos automáticos o 'cancel' para salir."
+  Title-specify-info: "&7Escribe el título. Usa &f{placeholders_tooltip} &7para datos automáticos o 'cancel' para salir."
+  Subtitle-specify-info: "&7Escribe el subtítulo. Usa &f{placeholders_tooltip} &7para datos automáticos o 'cancel' para salir."
+  Boss-bar-specify-info: "&7Escribe el texto de la barra superior. Usa &f{placeholders_tooltip} &7para datos automáticos o 'cancel' para salir."
+  Placeholders-tooltip: "variables disponibles"
+  Exceeded-maximum-characters: "&#FF3300El mensaje supera el máximo de caracteres. &8(&f{current_characters}&7/&f{maximum_characters}&8)"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-26"
+    Slots: "0-3;5-8;45-48;50-53"
+  Protection-info:
+    Display-item:
+      Type: "OAK_SIGN"
+      Amount: 1
+      Name: "&#FFD166Mensajes de la protección"
+      Lore:
+      - ""
+      - "&7Configura avisos de entrada y salida."
+    Slots: "4"
   Non-members-group-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&eNon-members"
+      Name: "&#FFD166Visitantes"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMyNzEwNTI3MTllZjY0MDc5ZWU4YzE0OTg5NTEyMzhhNzRkYWM0YzI3Yjk1NjQwZGI2ZmJkZGMyZDZiNWI2ZSJ9fX0="
       Lore:
-      - "&0"
-      - "&7&o(Click to switch edited group)"
-    Slots: "22"
+      - ""
+      - "&7Click para editar este grupo."
+    Slots: "31"
   Members-group-button: 
     Display-item: 
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eMembers"
+      Name: "&#FFD166Miembros"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch edited group)"
-    Slots: "22"
+      - ""
+      - "&7Click para editar este grupo."
+    Slots: "31"
   Owners-group-button: 
     Display-item: 
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eOwners"
+      Name: "&#FFD166Propietarios"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch edited group)"
+      - ""
+      - "&7Click para editar este grupo."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjBlM2ZlNTVhOGQyYTVkMjk5NTdlODI0MWM1M2RmZDI4OTM2NmQ4NWI2MzkzZTNiM2NiNzAwM2E4YTc3NDI4YiJ9fX0="
-    Slots: "22"
+    Slots: "31"
   Main-owner-group-button: 
     Display-item: 
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eMain owner"
+      Name: "&#FFD166Propietario principal"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch edited group)"
-    Slots: "22"
+      - ""
+      - "&7Click para editar este grupo."
+    Slots: "31"
   Message-type-button: 
     Display-item: 
       Type: "WRITABLE_BOOK"
       Amount: 1
-      Name: "&eMessage"
+      Name: "&#FFD166Chat"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch message type)"
-    Slots: "4"
+      - ""
+      - "&7Click para cambiar el formato."
+    Slots: "22"
   Action-bar-type-button: 
     Display-item: 
       Type: "EXPERIENCE_BOTTLE"
       Amount: 1
-      Name: "&eAction bar"
+      Name: "&#FFD166Barra de acción"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch message type)"
-    Slots: "4"
+      - ""
+      - "&7Click para cambiar el formato."
+    Slots: "22"
   Title-type-button: 
     Display-item: 
       Type: "ENDER_EYE"
       Amount: 1
-      Name: "&eTitle/subtitle"
+      Name: "&#FFD166Título y subtítulo"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch message type)"
-    Slots: "4"
+      - ""
+      - "&7Click para cambiar el formato."
+    Slots: "22"
   Boss-bar-type-button: 
     Display-item: 
       Type: "DRAGON_HEAD"
       Amount: 1
-      Name: "&eBoss bar"
+      Name: "&#FFD166Barra superior"
       Lore:
-      - "&0"
-      - "&7&o(Click to switch message type)"
-    Slots: "4"
+      - ""
+      - "&7Click para cambiar el formato."
+    Slots: "22"
   Greeting-message-button: 
     Display-item: 
       Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eGreeting message"
+      Name: "&#FFD166Mensaje de entrada"
       Lore:
-      - "&0"
-      - "&7&oMessage sent when a player"
-      - "&7&oenters your protection."
-      - "&0"
-      - "&aValue:"
-      - "&0"
-    Slots: "11"
+      - ""
+      - "&7Se muestra cuando un jugador"
+      - "&7entra en la protección."
+      - ""
+      - "&#00FB9AValor actual:"
+    Slots: "20"
   Farewell-message-button: 
     Display-item: 
       Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eFarewell message"
+      Name: "&#FFD166Mensaje de salida"
       Lore:
-      - "&0"
-      - "&7&oMessage sent when a player"
-      - "&7&oexits your protection."
-      - "&0"
-      - "&aValue:"
-      - "&0"
+      - ""
+      - "&7Se muestra cuando un jugador"
+      - "&7sale de la protección."
+      - ""
+      - "&#00FB9AValor actual:"
       Skin: ""
-    Slots: "15"
+    Slots: "24"
   Back-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cBack"
+      Name: "&#FFD166← Volver"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+    Slots: "45"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

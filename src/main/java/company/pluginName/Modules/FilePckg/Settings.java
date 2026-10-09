@@ -14,6 +14,13 @@ import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaStri
 @RegisteredPandaFieldContainer("config")
 public class Settings {
 
+	public static final PandaBooleanField SETTINGS_NETWORK_VIEWONLY = new PandaBooleanField(
+			"Settings.Network.View-only", false);
+	public static final PandaStringField SETTINGS_NETWORK_HOMESERVER = new PandaStringField(
+			"Settings.Network.Home-server", "survival");
+	public static final PandaLongField SETTINGS_NETWORK_PENDINGTELEPORTEXPIRATIONSECONDS = new PandaLongField(
+			"Settings.Network.Pending-teleport-expiration-seconds", 120L);
+
 	public static final PandaStringField SETTINGS_GENERAL_DATEFORMAT = new PandaStringField(
 			"Settings.General.Date-format", "dd/MM/yyyy HH:mm aa");
 
@@ -57,7 +64,7 @@ public class Settings {
 	public static final PandaBooleanField SETTINGS_STORE_IGNORETELEPORTCOST = new PandaBooleanField(
 			"Settings.Store.Ignore-teleport-cost", true);
 	public static final PandaStringField SETTINGS_STORE_PROTECTIONECONOMYSERVICE = new PandaStringField(
-			"Settings.Store.Protection-economy-service", EconomyService.VAULT.name());
+			"Settings.Store.Protection-economy-service", "");
 	public static final PandaStringField SETTINGS_STORE_PROTECTIONBLOCKECONOMYSERVICE = new PandaStringField(
 			"Settings.Store.Protection-block-economy-service", EconomyService.VAULT.name());
 

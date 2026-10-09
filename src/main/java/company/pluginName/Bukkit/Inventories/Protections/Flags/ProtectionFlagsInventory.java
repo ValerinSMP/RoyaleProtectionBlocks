@@ -10,12 +10,15 @@ import org.bukkit.inventory.ItemStack;
 
 import com.sk89q.worldguard.protection.flags.StateFlag.State;
 
+import company.pluginName.Bukkit.Inventories.Protections.Permissions.ProtectionsPermissionsListInventory;
+import company.pluginName.Bukkit.Inventories.Protections.Settings.ProtectionsSettingsListInventory;
 import company.pluginName.Exceptions.Exceptions;
 import company.pluginName.Exceptions.RoyaleProtectionBlocksExceptionImpl;
 import company.pluginName.Modules.ProtectionFlagsPckg.ProtectionFlagsService;
 import company.pluginName.Modules.ProtectionFlagsPckg.Objects.ProtectionFlag;
 import company.pluginName.Modules.ProtectionFlagsPckg.Utils.ProtectionFlagUtilities;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
@@ -23,6 +26,8 @@ import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaPrefixedStringField;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
 import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Listeners.PandaMessageListener.Callback;
 import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Services.PandaMessageListenerService;
@@ -47,8 +52,7 @@ public class ProtectionFlagsInventory extends PagedChestInventoryObject<Protecti
 		this.protection = protection;
 
 		setReplacements(new Replacement[] {
-				new Replacement("{protection}", () -> protection.getDisplayName() != null ? protection.getDisplayName()
-						: protection.getProtectionId()) });
+				new Replacement("{protection}", () -> ProtectionDisplayNames.forGui(protection)) });
 		setTitleReplacements(getReplacements());
 	}
 
@@ -132,9 +136,35 @@ public class ProtectionFlagsInventory extends PagedChestInventoryObject<Protecti
 		}
 	}
 
+	@ItemGenerator("Protection-info")
+	private ItemStack generateProtectionInfo(Item item) {
+		return ItemBuilder.inst().fromMap(item.getData(), Item.DISPLAYITEM_KEY)
+				.apply(protection.getDisplayItemOrDefault().clone());
+	}
+
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
+		closeInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
 		goToPreviousInventory();
+	}
+
+	@ItemExecutor("Permissions-tab")
+	private void executePermissionsTab() {
+		new ProtectionsPermissionsListInventory(getPlayer(), protection).openInventory();
+	}
+
+	@ItemExecutor("Settings-tab")
+	private void executeSettingsTab() {
+		new ProtectionsSettingsListInventory(getPlayer(), protection).openInventory();
 	}
 
 }

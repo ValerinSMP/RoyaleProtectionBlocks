@@ -1,38 +1,63 @@
-Title: "{protection_name} > Permissions"
-Size: 36
+Title: "Ajustes de la protección"
+Size: 54
 Entity:
-  Slots: "10-16;20-24"
+  Slots: "9-44"
 Items: 
+  Protection-info:
+    Display-item:
+      Name: "&#FFD166{protection_name}"
+      Lore:
+      - ""
+      - "&7Protección que estás editando."
+    Slots: "4"
   Background: 
+    Display-item: 
+      Type: "BLACK_STAINED_GLASS_PANE"
+      Amount: 1
+      Name: "&0"
+    Slots: "0-3;5-8;45-48;50-52"
+  Empty-slots: 
     Display-item: 
       Type: "GRAY_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-36"
-  Empty-slots: 
-    Display-item: 
-      Type: "WHITE_STAINED_GLASS_PANE"
+    Slots: "9-44"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&0"
-    Slots: "10-16;20-24"
+      Name: "&#FFD166← Volver"
+    Slots: "45"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "19"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "25"
+    Slots: "50"
   Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FF3300✘ Cerrar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "27"
+    Slots: "49"
+  Messages-button:
+    Display-item:
+      Type: "OAK_SIGN"
+      Amount: 1
+      Name: "&#FFD166Mensajes de entrada y salida"
+      Lore:
+      - ""
+      - "&7Configura qué se muestra cuando"
+      - "&7un jugador entra o sale de la protección."
+      - ""
+      - "&#FFD166→ Click para editar mensajes"
+    Slots: "53"

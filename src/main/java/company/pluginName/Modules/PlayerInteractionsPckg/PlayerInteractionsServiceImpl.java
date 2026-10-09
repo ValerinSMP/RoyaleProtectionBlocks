@@ -1,5 +1,8 @@
 package company.pluginName.Modules.PlayerInteractionsPckg;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.UUID;
@@ -36,6 +39,7 @@ import company.pluginName.Modules.ProtectionSettingsPckg.ProtectionSettingsServi
 import company.pluginName.Modules.ProtectionsPckg.ProtectionsServiceImpl;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
 import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionUtilities;
+import company.pluginName.Modules.SQLPckg.SQLService;
 import company.pluginName.Utils.EconomyUtilities;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
@@ -99,30 +103,33 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 	@RegisteredPandaField("lang")
 	private static final PandaStringField MESSAGE_TELEPORT_UNSAFEWARNINGTITLE = new PandaStringField(
-			"Message.Teleport.Unsafe-warning-title", "&cUnsafe location");
+			"Message.Teleport.Unsafe-warning-title", "&cUbicación insegura");
 	@RegisteredPandaField("lang")
 	private static final PandaStringListField MESSAGE_TELEPORT_UNSAFEWARNINGDESCRIPTION = new PandaStringListField(
 			"Message.Teleport.Unsafe-warning-description",
-			Arrays.asList("&7Your current home location seems", "&7not to include any solid platform or",
-					"&7contains dangerous elements, which makes it", "&7unsafe. Do you wish to teleport anyway?"));
+			Arrays.asList("&7El destino no parece tener una plataforma segura", "&7o contiene elementos peligrosos.",
+					"&7Podrías recibir daño al llegar.", "&7¿Quieres teletransportarte de todos modos?"));
 
 	@RegisteredPandaField("lang")
 	private static final PandaPrefixedStringField MESSAGE_PROTECTION_PERMISSIONS_CHARGEDSUCCESSFULLY = new PandaPrefixedStringField(
 			"Message.Protection.Permissions.Charged-successfully",
-			"&aYou've been charged a total amount of &e{amount}$");
+			"&aSe descontaron &e${amount} &ade tu saldo.");
 
 	@RegisteredPandaField("lang")
 	private static final PandaPrefixedStringField MESSAGE_PROTECTION_SETTINGS_CHARGEDSUCCESSFULLY = new PandaPrefixedStringField(
-			"Message.Protection.Settings.Charged-successfully", "&aYou've been charged a total amount of &e{amount}$");
+			"Message.Protection.Settings.Charged-successfully", "&aSe descontaron &e${amount} &ade tu saldo.");
 
 	@RegisteredPandaField("config")
 	private static final PandaBooleanField SETTINGS_PROTECTION_SHOWUNSAFETELEPORTWARNINGMENU = new PandaBooleanField(
 			"Settings.Protection.Show-unsafe-teleport-warning-menu", true);
+	@RegisteredPandaField("lang")
+	private static final PandaPrefixedStringField MESSAGE_TELEPORT_TRANSFERRING = new PandaPrefixedStringField(
+			"Message.Teleport.Transferring", "&7Enviándote al servidor de tu protección...");
 
 	@RegisteredPandaField("lang")
 	public static final PandaPrefixedStringField MESSAGE_PROTECTIONS_INVITATIONS_MEMBERACCEPTED = new PandaPrefixedStringField(
 			"Message.Protections.Invitations.Member-accepted",
-			"&aThe player &e{player_name} &ahas accepted your invitation to your protection &e{protection_name}&a.");
+			"&aEl jugador &e{player_name} &aaceptó la invitación a tu protección &e{protection_name}&a.");
 
 	@PandaInject
 	private ProtectionsServiceImpl protectionsService;
@@ -144,6 +151,12 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 	@PandaInject
 	private PlayerDataService playerDataService;
+
+	@PandaInject
+	private SQLService sqlService;
+
+	@PandaInject
+	private MainPluginClass plugin;
 
 	@PandaInject
 	private CoreProtectAPI coreProtectApi;
@@ -283,6 +296,7 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 	@Override
 	public void protectionRemovalRequest(ProtectionRemovalRequestInput input) throws RoyaleProtectionBlocksException {
+		checkIfWritable();
 		if (PvPUtilities.SETTINGS_COMBATLOGHOOK_CANCELPROTECTIONREMOVALINCOMBAT.isTrue()
 				&& PvPUtilities.isInCombat(input.getPlayer())) {
 			throw Exceptions.Protections.INCOMBAT.generateException();
@@ -618,6 +632,11 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 			throw Exceptions.Protections.PERMISSIONDENIED.generateException();
 		}
 
+		if (Settings.SETTINGS_NETWORK_VIEWONLY.isTrue()) {
+			requestCrossServerTeleport(input.getPlayer(), input.getProtection().getProtectionId());
+			return;
+		}
+
 		try {
 			input.getProtection().teleport(input.getPlayer(), input.isIgnoreCost(), input.isIgnoreUnsafeWarning());
 		} catch (RoyaleProtectionBlocksException e) {
@@ -635,6 +654,32 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 				throw e;
 			}
 		}
+	}
+
+	private void requestCrossServerTeleport(Player player, String protectionId) {
+		TasksUtils.executeOnAsync(() -> {
+			try {
+				sqlService.savePendingProtectionTeleport(player.getUniqueId(), protectionId);
+			} catch (RoyaleProtectionBlocksExceptionImpl e) {
+				e.sendError(player);
+				return;
+			}
+
+			TasksUtils.execute(() -> {
+				if (!player.isOnline()) {
+					return;
+				}
+				try (ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+						DataOutputStream output = new DataOutputStream(bytes)) {
+					output.writeUTF("Connect");
+					output.writeUTF(Settings.SETTINGS_NETWORK_HOMESERVER.getContent());
+					player.sendPluginMessage(plugin, "BungeeCord", bytes.toByteArray());
+					MessageTemplate.inst(MESSAGE_TELEPORT_TRANSFERRING.applyPrefix()).process().sendMessage(player);
+				} catch (IOException e) {
+					Exceptions.Protections.Teleport.UNKNOWN.generateException(e).sendError(player);
+				}
+			});
+		});
 	}
 
 	@Override
@@ -882,6 +927,7 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 	@Override
 	public void protectionPurchaseRequest(ProtectionPurchaseRequestInput input) throws RoyaleProtectionBlocksException {
+		checkIfWritable();
 		UUID oldOwner = input.getProtection().getOwnerUuid();
 
 		try {
@@ -1093,6 +1139,7 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 	}
 
 	private void checkIfModifiable(Player player, IProtection protection) throws RoyaleProtectionBlocksExceptionImpl {
+		checkIfWritable();
 		if (PvPUtilities.isInCombat(player)) {
 			throw Exceptions.Protections.INCOMBAT.generateException();
 		}
@@ -1103,6 +1150,12 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 		if (protection.isDeleted()) {
 			throw Exceptions.Protections.NOTFOUND.generateException();
+		}
+	}
+
+	private void checkIfWritable() throws RoyaleProtectionBlocksExceptionImpl {
+		if (Settings.SETTINGS_NETWORK_VIEWONLY.isTrue()) {
+			throw Exceptions.Protections.PERMISSIONDENIED.generateException();
 		}
 	}
 

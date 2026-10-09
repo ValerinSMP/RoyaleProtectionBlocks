@@ -1,36 +1,48 @@
-Title: "{block} > Recipe"
-Size: 45
-Recipe-slots: "11-13;20-22;29-31"
+Title: "Bloque | Receta"
+Size: 54
+Recipe-slots: "19-21;28-30;37-39"
 Messages:
-  Permission-specify-info: "&7Type the permission you wish to set on your recipe. Type 'cancel' to cancel this action."
+  Permission-specify-info: "&7Escribe el permiso de la receta. Escribe 'cancel' para salir."
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-44"
+    Slots: "0-8;45-52"
+  Recipe-info:
+    Display-item:
+      Type: "CRAFTING_TABLE"
+      Amount: 1
+      Name: "&#FFD166Receta del bloque"
+    Slots: "4"
   Cancel-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cCancel"
+      Name: "&#FF3300✘ Cancelar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmViNTg4YjIxYTZmOThhZDFmZjRlMDg1YzU1MmRjYjA1MGVmYzljYWI0MjdmNDYwNDhmMThmYzgwMzQ3NWY3In19fQ=="
-    Slots: "36"
+    Slots: "45"
   Confirm-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "LIME_DYE"
       Amount: 1
-      Name: "&aConfirm"
+      Name: "&#00FB9AGuardar receta"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDMxMmNhNDYzMmRlZjVmZmFmMmViMGQ5ZDdjYzdiNTVhNTBjNGUzOTIwZDkwMzcyYWFiMTQwNzgxZjVkZmJjNCJ9fX0="
-    Slots: "44"
+    Slots: "53"
   Permission-button:
     Display-item:
       Type: "NAME_TAG"
       Amount: 1
-      Name: "&aCurrent permission: &e{block_permission}"
+      Name: "&#FFD166Permiso: &f{block_permission}"
     Not-set-item:
       Type: "NAME_TAG"
       Amount: 1
-      Name: "&aCurrent permission: &7&oNot set yet"
-    Slots: "24"
+      Name: "&#FFD166Permiso: &7sin definir"
+    Slots: "23"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

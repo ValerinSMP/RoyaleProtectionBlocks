@@ -37,10 +37,9 @@ public class GreetingFarewellMessagesSetting extends SettingImpl<ConfiguredMessa
 	private PandaIntegerField settingBossBarMaximumLengthInChars;
 
 	public GreetingFarewellMessagesSetting() {
-		super("greeting-farewell-messages", true, null, null, "Greeting/Farewell messages", null, null, null, null,
-				ItemBuilder.inst().setMaterial(Material.OAK_SIGN).setName("&eGreeting/Farewell messages")
-						.setLore(Arrays.asList("&7Define the messages to show", "&7to players when they enter or",
-								"&7leave your protection."))
+		super("greeting-farewell-messages", true, null, null, "Mensajes de entrada y salida", null, null, null, null,
+				ItemBuilder.inst().setMaterial(Material.OAK_SIGN).setName("&#FFD166Mensajes de entrada y salida")
+						.setLore(Arrays.asList("&7Personaliza los avisos mostrados", "&7al entrar o salir de la protección."))
 						.build());
 
 		settingDefaultGreetingMessage = new PandaStringListField("Settings." + getId() + ".Default-greeting-message",

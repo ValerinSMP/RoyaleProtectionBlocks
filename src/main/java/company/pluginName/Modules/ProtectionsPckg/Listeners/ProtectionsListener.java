@@ -1,9 +1,9 @@
 package company.pluginName.Modules.ProtectionsPckg.Listeners;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,6 +13,11 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.block.BlockSpreadEvent;
+import org.bukkit.event.entity.EntityBreakDoorEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
@@ -23,6 +28,7 @@ import company.pluginName.Debugger.MessageType;
 import company.pluginName.MainPluginClass;
 import company.pluginName.Modules.ProtectionBlocksPckg.Objects.ProtectionBlock;
 import company.pluginName.Modules.ProtectionSettingsPckg.ProtectionSettingsService;
+import company.pluginName.Modules.ProtectionsPckg.Utils.BlockDestructionGuard;
 import company.pluginName.Utils.EventUtilitiesV2;
 import company.pluginName.Utils.EventsUtils;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
@@ -37,8 +43,6 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Interfaces.Protections.IProtecti
 
 @PandaListener
 public class ProtectionsListener implements Listener {
-
-	private static final List<String> TNT_TYPES = Arrays.asList("MINECART_TNT", "PRIMED_TNT");
 
 	@PandaInject
 	private MainPluginClass plugin;
@@ -145,46 +149,88 @@ public class ProtectionsListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onExplodeEntity(EntityExplodeEvent e) {
-		if (ProtectionSettingsService.TNT_EXPLOSIONS_SETTING.isEnabled()
-				&& TNT_TYPES.contains(e.getEntityType().name())) {
+		boolean tnt = BlockDestructionGuard.isTnt(e.getEntityType().name());
+		if (tnt && ProtectionSettingsService.TNT_EXPLOSIONS_SETTING.isEnabled()) {
 			IProtection tntProtection = RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
 					.findProtectionByLocation(e.getEntity().getLocation());
 
 			if (tntProtection != null && Boolean.FALSE.equals(tntProtection
 					.getSettingValue(ProtectionSettingsService.TNT_EXPLOSIONS_SETTING, PermissionGroup.GENERIC))) {
 				e.setCancelled(true);
-			} else {
-				e.blockList().removeIf(block -> {
-					IProtection protection = RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
-							.findProtectionByLocation(block.getLocation().add(0.5D, 0.5D, 0.5D));
-
-					if (protection != null) {
-						protection = protection.getParentProtection();
-
-						return protection.isProtectionBlock(block) || Boolean.FALSE.equals(protection.getSettingValue(
-								ProtectionSettingsService.TNT_EXPLOSIONS_SETTING, PermissionGroup.GENERIC));
-					}
-					return false;
-				});
 			}
-		} else {
-			e.blockList().removeIf(block -> RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
-					.findProtectionBySourceBlock(block) != null);
+		}
+
+		if (!e.isCancelled()) {
+			e.blockList().removeIf(block -> isProtectedFromExplosions(block, tnt));
 		}
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onExplodeBlock(BlockExplodeEvent e) {
-		e.blockList().removeIf(block -> RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
-				.findProtectionBySourceBlock(block) != null);
+		// Beds and respawn anchors are not TNT and cannot destroy a claim.
+		e.blockList().removeIf(block -> isProtectedFromExplosions(block, false));
+	}
+
+	private boolean isProtectedFromExplosions(Block block, boolean tnt) {
+		boolean sourceBlock = RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
+				.findProtectionBySourceBlock(block) != null;
+		IProtection protection = RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
+				.findProtectionByLocation(block.getLocation().add(0.5D, 0.5D, 0.5D));
+
+		if (protection == null) {
+			return sourceBlock;
+		}
+		if (!tnt) return true;
+
+		protection = protection.getParentProtection();
+		return BlockDestructionGuard.protectExplosion(true, sourceBlock, tnt,
+				ProtectionSettingsService.TNT_EXPLOSIONS_SETTING.isEnabled(),
+				tnt && Boolean.FALSE.equals(protection.getSettingValue(
+						ProtectionSettingsService.TNT_EXPLOSIONS_SETTING, PermissionGroup.GENERIC)));
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onMobGrief(EntityChangeBlockEvent e) {
-		if (RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
-				.findProtectionBySourceBlock(e.getBlock()) != null) {
+		boolean sourceBlock = RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
+				.findProtectionBySourceBlock(e.getBlock()) != null;
+		String type = e.getEntityType().name();
+		if (BlockDestructionGuard.protectMobChange(type,
+				!sourceBlock && BlockDestructionGuard.isDestructiveMob(type) && isInProtection(e.getBlock()), sourceBlock)) {
 			e.setCancelled(true);
 		}
+	}
+
+	private boolean isInProtection(Block block) {
+		return RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
+				.findProtectionByLocation(block.getLocation().add(0.5D, 0.5D, 0.5D)) != null;
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onMobBreakDoor(EntityBreakDoorEvent e) {
+		if (isInProtection(e.getBlock())) e.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onMobTrample(EntityInteractEvent e) {
+		if (!(e.getEntity() instanceof Player) && e.getBlock().getType() == Material.FARMLAND
+				&& isInProtection(e.getBlock())) e.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onEntityIgnite(BlockIgniteEvent e) {
+		if (e.getIgnitingEntity() != null && !(e.getIgnitingEntity() instanceof Player)
+				&& isInProtection(e.getBlock())) e.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onFireBurn(BlockBurnEvent e) {
+		if (isInProtection(e.getBlock())) e.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onFireSpread(BlockSpreadEvent e) {
+		if ((e.getSource().getType() == Material.FIRE || e.getSource().getType() == Material.SOUL_FIRE)
+				&& isInProtection(e.getBlock())) e.setCancelled(true);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

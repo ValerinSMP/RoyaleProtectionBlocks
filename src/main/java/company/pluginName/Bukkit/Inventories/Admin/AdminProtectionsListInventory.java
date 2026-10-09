@@ -17,6 +17,7 @@ import company.pluginName.Bukkit.Inventories.Admin.AdminProtectionsListInventory
 import company.pluginName.Exceptions.RoyaleProtectionBlocksExceptionImpl;
 import company.pluginName.Modules.PlaceholdersPckg.PlaceholdersService;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionUtilities;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
@@ -109,9 +110,7 @@ public class AdminProtectionsListInventory extends PagedChestInventoryObject<Pro
 		Location homeLocation = protection.getHome();
 		Location loc = protection.getBukkitLocation();
 		Replacement[] replacements = {
-				new Replacement("{protection}",
-						() -> protection.getDisplayName() != null ? protection.getDisplayName()
-								: protection.getProtectionId()),
+				new Replacement("{protection}", () -> ProtectionDisplayNames.forGui(protection)),
 				new Replacement("{protection_owner}",
 						() -> protection.getOwnerName() != null ? protection.getOwnerName() : "???"),
 				new Replacement("{world}", () -> protection.getWorldName()),
@@ -189,6 +188,11 @@ public class AdminProtectionsListInventory extends PagedChestInventoryObject<Pro
 	private void onClickRefreshButton(Item item, GeneratedItem generatedItem, InventoryClickEvent e) {
 		updateEntityList();
 		updateInventory();
+	}
+
+	@ItemExecutor("Close-button")
+	private void onClickCloseButton() {
+		closeInventory();
 	}
 
 	@Data

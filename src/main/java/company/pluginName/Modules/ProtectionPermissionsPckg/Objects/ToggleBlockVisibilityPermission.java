@@ -10,11 +10,10 @@ import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 public class ToggleBlockVisibilityPermission extends PermissionImpl {
 
 	public ToggleBlockVisibilityPermission() {
-		super("toggle-block-visibility", true, null, null, "Block Visibility", false, false, false, true, true, true,
+		super("toggle-block-visibility", true, null, null, "Visibilidad del bloque", false, false, false, true, true, true,
 				ItemBuilder.inst().setMaterial(Material.GRASS_BLOCK)
-						.setName("&eCan players toggle the block visibility on your protection?")
-						.setLore(Arrays.asList("&7Define if players can toggle", "&7the protection block visibility on",
-								"&7your protection with the &e/pb [show/hide]", "&7command or through the menu."))
+						.setName("&#FFD166Visibilidad del bloque")
+						.setLore(Arrays.asList("&7Permite mostrar u ocultar el bloque", "&7de protección desde el menú."))
 						.build());
 	}
 

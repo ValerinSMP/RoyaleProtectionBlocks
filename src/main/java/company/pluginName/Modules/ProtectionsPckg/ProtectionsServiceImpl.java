@@ -28,10 +28,12 @@ import company.pluginName.Exceptions.RoyaleProtectionBlocksExceptionImpl;
 import company.pluginName.Hooks.CoreProtect.CoreProtectAPI;
 import company.pluginName.Hooks.WorldGuard.WorldGuardAPI;
 import company.pluginName.Modules.ProtectionBlocksPckg.ProtectionBlocksService;
+import company.pluginName.Modules.FilePckg.Settings;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Components.Permissions.ProtectionPermission;
 import company.pluginName.Modules.ProtectionsPckg.Utils.FlagsUtilities;
 import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionUtilities;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import company.pluginName.Modules.SQLPckg.SQLService;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
 import darkpanda73.PandaUtils.PandaPlugin.PandaPluginClass;
@@ -105,8 +107,13 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 	@LoadMethod
 	private void load() {
 		AtomicInteger regeneratedRegions = new AtomicInteger();
+		boolean viewOnly = Settings.SETTINGS_NETWORK_VIEWONLY.isTrue();
 
 		sqlService.getProtections().stream().filter(protection -> {
+			if (viewOnly) {
+				loadViewOnly(protection);
+				return false;
+			}
 			if (Bukkit.getWorld(protection.getWorldName()) != null) {
 				if (protection.getProtectedRegion() == null) {
 					try {
@@ -174,20 +181,22 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 			}
 		});
 
-		PandaPluginClass.getSimpleLogger()
-				.sendInfo("Checking for missing members on the database (This process may take a while).");
+		if (!viewOnly) {
+			PandaPluginClass.getSimpleLogger()
+					.sendInfo("Checking for missing members on the database (This process may take a while).");
 
-		this.protectionByRegion.forEach((key, protection) -> {
-			protection.getPlayers().getWorldGuardMembers().list().stream()
-					.filter(member -> !protection.isMainOwner(member) && !protection.isMember(member))
-					.forEach(missingMember -> {
-						try {
-							protection.addMemberAndSave(missingMember, false);
-						} catch (RoyaleProtectionBlocksException e) {
-							e.sendError(Bukkit.getConsoleSender());
-						}
-					});
-		});
+			this.protectionByRegion.forEach((key, protection) -> {
+				protection.getPlayers().getWorldGuardMembers().list().stream()
+						.filter(member -> !protection.isMainOwner(member) && !protection.isMember(member))
+						.forEach(missingMember -> {
+							try {
+								protection.addMemberAndSave(missingMember, false);
+							} catch (RoyaleProtectionBlocksException e) {
+								e.sendError(Bukkit.getConsoleSender());
+							}
+						});
+			});
+		}
 
 		sqlService.getProtectionOwners().forEach((id, owners) -> {
 			Protection protection = findProtectionById(id);
@@ -198,31 +207,33 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 
 		PandaPluginClass.getSimpleLogger().sendInfo("Checking completed!");
 
-		PandaPluginClass.getSimpleLogger()
-				.sendInfo("Checking for missing owners on the database (This process may take a while).");
+		if (!viewOnly) {
+			PandaPluginClass.getSimpleLogger()
+					.sendInfo("Checking for missing owners on the database (This process may take a while).");
 
-		this.protectionByRegion.forEach((key, protection) -> {
-			protection.getPlayers().getWorldGuardOwners().list().stream()
-					.filter(owner -> !protection.isMainOwner(owner) && !protection.isOwner(owner))
-					.forEach(missingOwner -> {
-						try {
-							protection.addOwnerAndSave(missingOwner, false);
-						} catch (RoyaleProtectionBlocksException e) {
-							e.sendError(Bukkit.getConsoleSender());
-						}
-					});
-		});
-		this.protectionByRegion.forEach((key, protection) -> {
-			protection.getPlayers().getWorldGuardOwners().list().stream()
-					.filter(owner -> !protection.isMainOwner(owner) && !protection.isMember(owner))
-					.forEach(missingMember -> {
-						try {
-							protection.addMemberAndSave(missingMember, false);
-						} catch (RoyaleProtectionBlocksException e) {
-							e.sendError(Bukkit.getConsoleSender());
-						}
-					});
-		});
+			this.protectionByRegion.forEach((key, protection) -> {
+				protection.getPlayers().getWorldGuardOwners().list().stream()
+						.filter(owner -> !protection.isMainOwner(owner) && !protection.isOwner(owner))
+						.forEach(missingOwner -> {
+							try {
+								protection.addOwnerAndSave(missingOwner, false);
+							} catch (RoyaleProtectionBlocksException e) {
+								e.sendError(Bukkit.getConsoleSender());
+							}
+						});
+			});
+			this.protectionByRegion.forEach((key, protection) -> {
+				protection.getPlayers().getWorldGuardOwners().list().stream()
+						.filter(owner -> !protection.isMainOwner(owner) && !protection.isMember(owner))
+						.forEach(missingMember -> {
+							try {
+								protection.addMemberAndSave(missingMember, false);
+							} catch (RoyaleProtectionBlocksException e) {
+								e.sendError(Bukkit.getConsoleSender());
+							}
+						});
+			});
+		}
 
 		PandaPluginClass.getSimpleLogger().sendInfo("Checking completed!");
 
@@ -260,15 +271,17 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 			}
 		});
 
-		this.protectionByRegion.values().forEach(prot -> {
-			try {
-				prot.synchronizeWorldGuardRegion();
-			} catch (RoyaleProtectionBlocksExceptionImpl e) {
-				if (e.getType() != Exceptions.Protections.REGENONLYONPARENT.getExceptionType()) {
-					e.sendError(Bukkit.getConsoleSender());
+		if (!viewOnly) {
+			this.protectionByRegion.values().forEach(prot -> {
+				try {
+					prot.synchronizeWorldGuardRegion();
+				} catch (RoyaleProtectionBlocksExceptionImpl e) {
+					if (e.getType() != Exceptions.Protections.REGENONLYONPARENT.getExceptionType()) {
+						e.sendError(Bukkit.getConsoleSender());
+					}
 				}
-			}
-		});
+			});
+		}
 
 		plugin.sendInfo(getClass(),
 				String.format("Loaded a total amount of '%d' protection(s)", this.protectionByRegion.size()));
@@ -311,6 +324,7 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 	 */
 
 	public void transfer(ProtectionTransferData protectionTransferData) throws RoyaleProtectionBlocksException {
+		ensureWritable();
 		try {
 			executeSynchronized(() -> {
 				Protection existentProtection = this.protectionByRegion.get(protectionTransferData.getProtectionId());
@@ -362,6 +376,7 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 
 	@Override
 	public Protection create(ProtectionCreationData protectionCreationData) throws RoyaleProtectionBlocksException {
+		ensureWritable();
 		try {
 			Protection protection = new Protection(protectionCreationData.getOwnerUuid(),
 					protectionCreationData.getLocation(), protectionCreationData.getProtectionBlock());
@@ -384,6 +399,11 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 				protection.setCreationInProgress(true);
 
 				protection.init();
+				if (protection.getOwnerName() != null) {
+					protection.setDisplayName(ProtectionDisplayNames.automaticName(protection.getOwnerName(),
+							ProtectionDisplayNames.nextAutomaticNumber(findProtectionsByOwner(protection.getOwnerUuid()))),
+							false);
+				}
 
 				protection.setCreatedDate(System.currentTimeMillis());
 
@@ -413,6 +433,7 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 
 	@Override
 	public void delete(ProtectionRemovalData protectionRemovalData) throws RoyaleProtectionBlocksException {
+		ensureWritable();
 		try {
 			Protection protection = findProtectionById(protectionRemovalData.getProtectionId());
 
@@ -453,8 +474,11 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 									(Player) protectionRemovalData.getExecutor(),
 									protection.getBukkitLocation().getBlock());
 						} else {
-							coreProtectApi.getHook().registerProtectionRemoval(protection.getOwnerName(),
-									protection.getBukkitLocation().getBlock());
+							Player owner = Bukkit.getPlayer(protection.getOwnerUuid());
+							if (owner != null) {
+								coreProtectApi.getHook().registerProtectionRemoval(owner,
+										protection.getBukkitLocation().getBlock());
+							}
 						}
 					}
 
@@ -522,6 +546,17 @@ public class ProtectionsServiceImpl implements ProtectionsService<Protection> {
 		} catch (Throwable e) {
 			unload(protection);
 			throw Exceptions.Protections.UNKNOWN.generateException(e);
+		}
+	}
+
+	private void loadViewOnly(Protection protection) {
+		protectionByRegion.put(protection.getProtectionId().toLowerCase(), protection);
+		protectionsByOwner.computeIfAbsent(protection.getOwnerUuid(), ownerUuid -> new ArrayList<>()).add(protection);
+	}
+
+	private void ensureWritable() throws RoyaleProtectionBlocksException {
+		if (Settings.SETTINGS_NETWORK_VIEWONLY.isTrue()) {
+			throw Exceptions.Protections.PERMISSIONDENIED.generateException();
 		}
 	}
 

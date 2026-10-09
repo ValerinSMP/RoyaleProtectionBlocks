@@ -1,113 +1,115 @@
-Title: "Protection Blocks > {block}"
-Size: 45
+Title: "Configurar bloque | {block}"
+Size: 54
 Messages:
-  Id-specify-info: "&7Type the ID you wish to set on your protection block. Type 'cancel' to cancel this action."
-  Permission-specify-info: "&7Type the permission you wish to set on your protection block. Type 'cancel' to cancel this action."
-  Blocks-specify-info: "&7Type the amount of blocks you wish to set on your protection block. Type 'cancel' to cancel this action."
-  Price-specify-info: "&7Type the price you wish to set on your protection block. Type 'cancel' to cancel this action."
+  Id-specify-info: "&7Escribe el ID del bloque. Escribe 'cancel' para salir."
+  Permission-specify-info: "&7Escribe el permiso del bloque. Escribe 'cancel' para salir."
+  Blocks-specify-info: "&7Escribe la cantidad de bloques. Escribe 'cancel' para salir."
+  Price-specify-info: "&7Escribe el precio del bloque. Escribe 'cancel' para salir."
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-44"
+    Slots: "0-3;5-8;45-52"
   Cancel-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cCancel"
+      Name: "&#FF3300✘ Cancelar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmViNTg4YjIxYTZmOThhZDFmZjRlMDg1YzU1MmRjYjA1MGVmYzljYWI0MjdmNDYwNDhmMThmYzgwMzQ3NWY3In19fQ=="
-    Slots: "36"
+    Slots: "45"
   Confirm-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "LIME_DYE"
       Amount: 1
-      Name: "&aConfirm"
+      Name: "&#00FB9A✔ Guardar cambios"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDMxMmNhNDYzMmRlZjVmZmFmMmViMGQ5ZDdjYzdiNTVhNTBjNGUzOTIwZDkwMzcyYWFiMTQwNzgxZjVkZmJjNCJ9fX0="
-    Slots: "44"
+    Slots: "53"
   Protection-block-item:
     Not-set-item:
       Type: "RED_STAINED_GLASS_PANE"
       Amount: 1
-      Name: "&7&oNot set yet"
+      Name: "&7Objeto sin definir"
       Lore:
-      - "&0"
-      - "&8 - &aLeft click with item: &eSet as current item"
-    Replace-item-lore-line: "&8 - &aLeft click with item: &eReplace current item"
-    Take-item-lore-line: "&8 - &aLeft click without item: &eTake current item"
-    Slots: "11"
+      - ""
+      - "&7Click izquierdo con un objeto"
+      - "&7para seleccionarlo."
+    Replace-item-lore-line: "&7Click izquierdo con un objeto: &freemplazar."
+    Take-item-lore-line: "&7Click izquierdo sin objeto: &fretirar."
+    Slots: "4"
   Blocks-x-button:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&aCurrent blocks on X: &e{blocks_x}"
+      Name: "&#FFD166Tamaño X: &f{blocks_x}"
       Lore:
-      - "&0"
-      - "&8 - &aLeft click: &eIncrease two blocks"
-      - "&8 - &aRight click: &eDecrease two blocks"
-      - "&8 - &aLeft click + Shift: &eSpecify current blocks"
+      - ""
+      - "&7Izquierdo: &fagregar 2 bloques."
+      - "&7Derecho: &fquitar 2 bloques."
+      - "&7Shift + izquierdo: &fintroducir valor."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDFjNTkyZDQ1ZjJjYTE2MDZhYjIzYjc3MDM5YjI5OTU5YjY1YThiMDdlMWNiMzk1M2VjYjdiYTJlYzJhMDRiYiJ9fX0="
-    Slots: "13"
+    Slots: "20"
   Blocks-y-button:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&aCurrent blocks on Y: &e{blocks_y}"
+      Name: "&#FFD166Tamaño Y: &f{blocks_y}"
       Lore:
-      - "&0"
-      - "&8 - &aLeft click: &eIncrease two blocks"
-      - "&8 - &aRight click: &eDecrease two blocks"
-      - "&8 - &aLeft click + Shift: &eSpecify current blocks"
+      - ""
+      - "&7Izquierdo: &fagregar 2 bloques."
+      - "&7Derecho: &fquitar 2 bloques."
+      - "&7Shift + izquierdo: &fintroducir valor."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGU5ZTRiZDcyYTQwNjE3MmMzM2ZmNTk4ZDA3ZjRjMDNjZTQ1MmEwNGI0YzQ3YzAwYTg4MjUyODc1NDgxZTlhNiJ9fX0="
-    Slots: "14"
+    Slots: "21"
   Blocks-z-button:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&aCurrent blocks on Z: &e{blocks_z}"
+      Name: "&#FFD166Tamaño Z: &f{blocks_z}"
       Lore:
-      - "&0"
-      - "&8 - &aLeft click: &eIncrease two blocks"
-      - "&8 - &aRight click: &eDecrease two blocks"
-      - "&8 - &aLeft click + Shift: &eSpecify current blocks"
+      - ""
+      - "&7Izquierdo: &fagregar 2 bloques."
+      - "&7Derecho: &fquitar 2 bloques."
+      - "&7Shift + izquierdo: &fintroducir valor."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWJkNTIwZjhkZmU0ODYzOGY3MjYzZDhlZGJjNWVlZmQ0MGM5NWMxMjZmNzE2MmRhMzEwMDFhYjc3ZmYzZGNjMSJ9fX0="
-    Slots: "15"
+    Slots: "22"
   Allowed-worlds-button:
     Display-item:
       Type: "PLAYER_HEAD"
-      Name: "&aAllowed worlds"
+      Name: "&#FFD166Mundos permitidos"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY5MTk2YjMzMGM2Yjg5NjJmMjNhZDU2MjdmYjZlY2NlNDcyZWFmNWM5ZDQ0Zjc5MWY2NzA5YzdkMGY0ZGVjZSJ9fX0="
     Slots: "29"
   Id-button:
     Display-item:
       Type: "NAME_TAG"
-      Name: "&aCurrent ID: &e{block_id}"
+      Name: "&#FFD166ID: &f{block_id}"
     Not-set-item:
       Type: "NAME_TAG"
-      Name: "&aCurrent ID: &7&oNot set yet"
+      Name: "&#FFD166ID: &7sin definir"
     Not-modifiable-item:
       Type: "NAME_TAG"
-      Name: "&aCurrent ID: &e{block_id} &7&o[Not modifiable]"
-    Slots: "31"
-  Recipe-button:
-    Display-item:
-      Type: "CRAFTING_TABLE"
-      Name: "&aRecipe"
-    Slots: "32"
+      Name: "&#FFD166ID: &f{block_id} &8(no modificable)"
+    Slots: "30"
   Permission-button:
     Display-item:
       Type: "PAPER"
-      Name: "&aCurrent permission: &e{block_permission}"
+      Name: "&#FFD166Permiso: &f{block_permission}"
     Not-set-item:
       Type: "PAPER"
-      Name: "&aCurrent permission: &7&oNot set yet"
-    Slots: "33"
+      Name: "&#FFD166Permiso: &7sin definir"
+    Slots: "32"
   Price-button:
     Display-item:
       Type: "EMERALD"
-      Name: "&aCurrent price: &e{block_price}"
+      Name: "&#FFD166Precio: &f{block_price}"
     Not-set-item:
       Type: "EMERALD"
-      Name: "&aCurrent price: &7&oNot for sale"
-    Slots: "34"
+      Name: "&#FFD166Precio: &7no está a la venta"
+    Slots: "33"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

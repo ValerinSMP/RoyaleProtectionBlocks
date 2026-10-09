@@ -1,42 +1,57 @@
-Title: "Invitations"
-Size: 27
+Title: "Invitaciones ({current_page}/{max_page})"
+Size: 54
 Entity:
-  Name: "&e{protection_name}"
+  Name: "&#FFD166{protection_name}"
   Lore: 
-  - "&0"
-  - "&a&oOwner: &e{protection_owner}"
-  - "&a&oWorld: &e{protection_world}"
-  - "&a&oLocation: &ex={protection_location_x},y={protection_location_y},z={protection_location_z}"
-  Left-click-lore-line: " &8- &aLeft click: &e{left_click_action}"
-  Right-click-lore-line: " &8- &aRight click: &e{right_click_action}"
-  Accept-action-lore-line: "Accept invitation"
-  Reject-action-lore-line: "Reject invitation"
-  Slots: "0-17"
+  - ""
+  - "&7Propietario: &f{protection_owner}"
+  - "&7Mundo: &f{protection_world}"
+  - "&7Ubicación: &f{protection_location_x}, {protection_location_y}, {protection_location_z}"
+  Left-click-lore-line: "&7Click izquierdo: &f{left_click_action}"
+  Right-click-lore-line: "&7Click derecho: &f{right_click_action}"
+  Accept-action-lore-line: "Aceptar invitación"
+  Reject-action-lore-line: "Rechazar invitación"
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
+    Slots: "0-3;5-8;45-48;50-53"
+  Invitations-info:
+    Display-item:
+      Type: "PAPER"
+      Amount: 1
+      Name: "&#FFD166Invitaciones"
+      Lore:
+      - ""
+      - "&7Acepta o rechaza invitaciones pendientes."
+    Slots: "4"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "21"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "23"
+    Slots: "50"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
+      Amount: 1
+      Name: "&#FFD166← Volver"
+      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
+    Slots: "45"
   Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&cClose"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

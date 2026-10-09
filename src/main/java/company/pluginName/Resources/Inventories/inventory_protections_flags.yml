@@ -1,34 +1,74 @@
-Title: "{protection} > Flags"
-Size: 27
+Title: "Reglas | Entorno"
+Size: 54
 Entity:
-  Slots: "0-17"
+  Slots: "9-44"
 Messages:
-  Flag-string-specify-info: "&7Type the text you want to specify in this flag. Type 'cancel' to cancel this action."
+  Flag-string-specify-info: "&7Escribe el valor de esta regla. Escribe 'cancel' para salir."
 Items: 
+  Protection-info:
+    Display-item:
+      Name: "&#FFD166{protection}"
+      Lore:
+      - ""
+      - "&7Protección que estás editando."
+    Slots: "4"
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
+    Slots: "0-3;5-8;45;50-53"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
+      Amount: 1
+      Name: "&#FFD166← Volver"
+    Slots: "45"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "18"
+    Slots: "51"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "26"
+    Slots: "53"
+  Permissions-tab:
+    Display-item:
+      Type: "OAK_FENCE_GATE"
+      Amount: 1
+      Name: "&7Permisos"
+      Lore:
+      - "&7Acciones permitidas dentro"
+      - "&7de la protección."
+    Slots: "46"
+  Environment-tab:
+    Display-item:
+      Type: "GOLD_BLOCK"
+      Amount: 1
+      Name: "&#00FB9A✔ Entorno"
+      Lore:
+      - "&7Configura las reglas generales"
+      - "&7del terreno protegido."
+    Slots: "47"
+  Settings-tab:
+    Display-item:
+      Type: "WRITABLE_BOOK"
+      Amount: 1
+      Name: "&7Mensajes y extras"
+      Lore:
+      - "&7Avisos de entrada, salida"
+      - "&7y opciones adicionales."
+    Slots: "48"
   Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FF3300✘ Cerrar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+    Slots: "49"

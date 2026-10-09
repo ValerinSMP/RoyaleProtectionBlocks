@@ -5,7 +5,7 @@ version: ${project.spigotVersion}
 description: ${project.description}
 api-version: 1.13
 depend: [ WorldGuard ]
-softdepend: [ PlaceholderAPI, ItemsAdder, ProtectionStones, Oraxen, Nexo, DeluxeCombat, LuckPerms, CombatLogX, PvPManager, ProtocolLib, Vault, TokenManager, EssentialsX, CoinsEngine, PlayerPoints, CoreProtect ]
+softdepend: [ PlaceholderAPI, ItemsAdder, ProtectionStones, Oraxen, Nexo, DeluxeCombat, LuckPerms, CombatLogX, PvPManager, ProtocolLib, Vault, TokenManager, EssentialsX, CoinsEngine, PlayerPoints, CoreProtect, squaremap ]
 
 permissions:
   protectionblocks.teleport:

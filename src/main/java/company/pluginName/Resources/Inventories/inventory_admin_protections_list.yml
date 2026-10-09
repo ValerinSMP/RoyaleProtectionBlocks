@@ -1,57 +1,63 @@
-Title: "Protections"
-Title-other: "Protections from {playername}"
-Size: 27
+Title: "Administrar protecciones ({current_page}/{max_page})"
+Title-other: "Protecciones de {playername} ({current_page}/{max_page})"
+Size: 54
 Entity:
-  Name: "&e{protection}"
+  Name: "&#FFD166{protection}"
   Lore: 
-  - "&0"
-  - "&a&oWorld: &e{world}"
-  - "&a&oLocation: &ex={location_x},y={location_y},z={location_z}"
-  Teleport-lore-line: " &8- &aLeft click: &eTeleport to protection home"
-  Teleport-not-set-lore-line: " &8- &a&mLeft click&r&a: &7No home set yet"
-  Edit-lore-line: " &8- &aRight click: &eManage protection"
-  Delete-lore-line: " &8- &aRight click + Shift: &eDelete protection"
-  Slots: "0-17"
+  - ""
+  - "&7Mundo: &f{world}"
+  - "&7Ubicación: &f{location_x}, {location_y}, {location_z}"
+  Teleport-lore-line: "&7Click izquierdo: &fir al punto de inicio."
+  Teleport-not-set-lore-line: "&7Punto de inicio sin definir."
+  Edit-lore-line: "&7Click derecho: &fadministrar protección."
+  Delete-lore-line: "&#FF3300Shift + click derecho: eliminar protección."
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
+    Slots: "0-8;45-53"
+  Menu-info:
+    Display-item:
+      Type: "CHEST"
+      Amount: 1
+      Name: "&#FFD166Administrar protecciones"
+    Slots: "4"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "18"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "26"
+    Slots: "50"
   Creation-date-sort-button:
     Display-item:
       Type: "CLOCK"
       Amount: 1
-      Name: "&aCurrent sort: &eCreation date"
+      Name: "&#FFD166Orden: &fFecha de creación"
     Slots: "99"
     Version: 3
   Name-sort-button:
     Display-item:
       Type: "NAME_TAG"
       Amount: 1
-      Name: "&aCurrent sort: &eName"
+      Name: "&#FFD166Orden: &fNombre"
     Slots: "99"
     Version: 3
   World-sort-button:
     Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&aCurrent sort: &eWorld"
+      Name: "&#FFD166Orden: &fMundo"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI4OWQ1YjE3ODYyNmVhMjNkMGIwYzNkMmRmNWMwODVlODM3NTA1NmJmNjg1YjVlZDViYjQ3N2ZlODQ3MmQ5NCJ9fX0="
     Slots: "99"
     Version: 3
@@ -59,17 +65,23 @@ Items:
     Display-item:
       Type: "HOPPER"
       Amount: 1
-      Name: "&aAmount of protections: &e{total_amount}"
+      Name: "&#FFD166Protecciones: &f{total_amount}"
       Lore:
-      - "&0"
-      - "&7&o(Click to modify filters)"
-    Slots: "22"
+      - ""
+      - "&7Click para modificar los filtros."
+    Slots: "52"
     Version: 3
   Refresh-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "CLOCK"
       Amount: 1
-      Name: "&aRefresh list"
+      Name: "&#00FB9AActualizar lista"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTg4N2NjMzg4YzhkY2ZjZjFiYThhYTVjM2MxMDJkY2U5Y2Y3YjFiNjNlNzg2YjM0ZDRmMWMzNzk2ZDNlOWQ2MSJ9fX0="
-    Slots: "24"
+    Slots: "53"
     Version: 3
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

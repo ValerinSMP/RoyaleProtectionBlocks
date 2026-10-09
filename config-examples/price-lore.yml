@@ -1,0 +1,9 @@
+# Merge this section into RoyaleProtectionBlocks/Config.yml.
+# The numeric price comes ONLY from the actual block definition in MySQL.
+Protection-block-presentation:
+  Price-lore:
+    Enabled: true
+    Placeholder: '{price}'
+    # Optional compatibility for existing lore '$5000⛃'. Both empty disables it.
+    Legacy-prefix: '$'
+    Legacy-suffix: '⛃'

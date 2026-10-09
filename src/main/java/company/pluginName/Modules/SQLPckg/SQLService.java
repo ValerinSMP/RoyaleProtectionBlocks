@@ -44,6 +44,7 @@ import company.pluginName.Modules.SQLPckg.Changelogs.Changelog0012AddInvitations
 import company.pluginName.Modules.SQLPckg.Changelogs.Changelog0013AddInvitationRequirementColumn;
 import company.pluginName.Modules.SQLPckg.Changelogs.Changelog0014IncreasePriceMaximumSize;
 import company.pluginName.Modules.SQLPckg.Changelogs.Changelog0015AddAsOwnerInvitationColumn;
+import company.pluginName.Modules.SQLPckg.Changelogs.Changelog0016AddPendingProtectionTeleportsTable;
 import darkpanda73.PandaUtils.PandaSQLModule.v2.Annotations.PandaSQLConfigV2;
 import darkpanda73.PandaUtils.PandaSQLModule.v2.SQL.Objects.Changelogs.SQLChangelog;
 import darkpanda73.PandaUtils.PandaSQLModule.v2.SQL.Objects.Statements.DeleteStatement;
@@ -59,6 +60,7 @@ import darkpanda73.PandaUtils.PandaSQLModule.v2.Services.PandaSQLService;
 import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemStackUtilities;
 import darkpanda73.PandaUtils.Services.PandaEconomiesModule.Enums.EconomyService;
 import darkpanda73.PandaUtils.Utilities.Java.Objects.ObjectUtilities;
+import darkpanda73.PandaUtils.Utilities.Java.Objects.Pair;
 import lombok.Data;
 import royale.RoyaleProtectionBlocks.Plugin.API.Enums.BlockReason;
 import royale.RoyaleProtectionBlocks.Plugin.API.Enums.PermissionGroup;
@@ -147,6 +149,7 @@ public class SQLService extends PandaSQLService {
 			new Column("PlayerUuid", Types.CHAR, "CHAR(36)").setNotNull(true),
 			new Column("EconomyService", Types.VARCHAR, "VARCHAR(36)").setNotNull(true),
 			new Column("Amount", Types.DECIMAL, "DECIMAL(12, 2)").setUnsigned(true).setNotNull(true));
+	public static final Table PENDING_PROTECTION_TELEPORTS_TABLE = Changelog0016AddPendingProtectionTeleportsTable.PENDING_PROTECTION_TELEPORTS_TABLE;
 
 	@Override
 	public Collection<SQLChangelog> getSQLChangelogs() {
@@ -158,7 +161,7 @@ public class SQLService extends PandaSQLService {
 				new Changelog0009AddOwnersAsMembersConstraint(), new Changelog0010AddPlayerDataTable(),
 				new Changelog0011AddPendingPaymentsTable(), new Changelog0012AddInvitationsTable(),
 				new Changelog0013AddInvitationRequirementColumn(), new Changelog0014IncreasePriceMaximumSize(),
-				new Changelog0015AddAsOwnerInvitationColumn());
+				new Changelog0015AddAsOwnerInvitationColumn(), new Changelog0016AddPendingProtectionTeleportsTable());
 	}
 
 	/*
@@ -1014,6 +1017,36 @@ public class SQLService extends PandaSQLService {
 									economyService.name()))));
 		} catch (Throwable e) {
 			throw Exceptions.PendingPayments.Delete.SQL.generateException(e);
+		}
+	}
+
+	public Pair<String, Long> getPendingProtectionTeleport(UUID uuid) throws RoyaleProtectionBlocksExceptionImpl {
+		try (ResultSet set = this.getSqlConnection().executeQuery(SelectStatement.inst()
+				.addTable(PENDING_PROTECTION_TELEPORTS_TABLE).setCondition(EqualsCondition
+						.inst(PENDING_PROTECTION_TELEPORTS_TABLE.getColumn("PlayerUuid"), uuid.toString())))) {
+			return set.next() ? new Pair<>(set.getString("RegionId"), set.getLong("CreatedDate")) : null;
+		} catch (Throwable e) {
+			throw Exceptions.Protections.Teleport.UNKNOWN.generateException(e);
+		}
+	}
+
+	public void savePendingProtectionTeleport(UUID uuid, String regionId) throws RoyaleProtectionBlocksExceptionImpl {
+		InsertStatement insert = InsertStatement.inst(PENDING_PROTECTION_TELEPORTS_TABLE)
+				.addEntry(uuid.toString(), regionId, System.currentTimeMillis()).setConditionIfExists(EqualsCondition
+						.inst(PENDING_PROTECTION_TELEPORTS_TABLE.getColumn("PlayerUuid"), uuid.toString()));
+		try {
+			this.getSqlConnection().executeInsert(insert);
+		} catch (Throwable e) {
+			throw Exceptions.Protections.Teleport.UNKNOWN.generateException(e);
+		}
+	}
+
+	public void deletePendingProtectionTeleport(UUID uuid) throws RoyaleProtectionBlocksExceptionImpl {
+		try {
+			this.getSqlConnection().executeDelete(DeleteStatement.inst(PENDING_PROTECTION_TELEPORTS_TABLE).setCondition(
+					EqualsCondition.inst(PENDING_PROTECTION_TELEPORTS_TABLE.getColumn("PlayerUuid"), uuid.toString())));
+		} catch (Throwable e) {
+			throw Exceptions.Protections.Teleport.UNKNOWN.generateException(e);
 		}
 	}
 

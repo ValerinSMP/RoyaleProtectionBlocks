@@ -116,39 +116,6 @@ Commands:
             Aliases: 
             - "g"
             Cooldown: 0
-      Files: 
-        Name: "files"
-        Description: "Manage the importation and exportation of data through files"
-        Permission: "protectionblocks.files"
-        Usage: "[help|subcommand]"
-        Aliases: 
-        - "f"
-        Subcommands: 
-          Help: 
-            Name: "help"
-            Description: "Get all the commands"
-            Permission: ""
-            Usage: "[page]"
-            Aliases: 
-            - "h"
-          Import: 
-            Name: "import"
-            Description: "Import all the information of an specific type of data from its respective
-              file"
-            Permission: "protectionblocks.files.import"
-            Usage: "<blocks>"
-            Aliases: 
-            - "i"
-            Cooldown: 0
-          Export: 
-            Name: "export"
-            Description: "Export all the information of an specific type of data to its respective
-              file"
-            Permission: "protectionblocks.files.export"
-            Usage: "<blocks>"
-            Aliases: 
-            - "e"
-            Cooldown: 0
       Admin: 
         Name: "admin"
         Description: "Commands used to manage staff commands"
@@ -242,13 +209,6 @@ Commands:
             Permission: "protectionblocks.admin.block"
             Aliases: 
             - "b"
-            Cooldown: 0
-          Last-login: 
-            Name: "lastlogin"
-            Description: "Shows the last time a player was connected"
-            Permission: "protectionblocks.admin.lastlogin"
-            Aliases: 
-            - "ll"
             Cooldown: 0
           Staff-mode: 
             Name: "staffmode"
@@ -366,13 +326,6 @@ Commands:
         Aliases: 
         - "uc"
         Cooldown: 0
-      Buy: 
-        Name: "buy"
-        Description: "Purchase protection blocks which are on sale"
-        Permission: ""
-        Usage: "[protection block]"
-        Aliases: []
-        Cooldown: 0
       Set-home: 
         Name: "sethome"
         Description: "Set the home on your current protection"
@@ -418,14 +371,6 @@ Commands:
         Usage: "[parent protection] [child protection]"
         Aliases: 
         - "m"
-        Cooldown: 0
-      Priority: 
-        Name: "priority"
-        Description: "Set the priority of the current protection"
-        Permission: "protectionblocks.priority"
-        Usage: "<priority> [protection id]"
-        Aliases: 
-        - "p"
         Cooldown: 0
       Fly: 
         Name: "fly"

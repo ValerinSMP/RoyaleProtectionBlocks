@@ -16,10 +16,9 @@ public class InventoryAccessPermission extends PermissionImpl {
 			"Permissions.chestaccess.Drop-hoppers-if-non-members-access-denied", false);
 
 	public InventoryAccessPermission() {
-		super("chestaccess", true, null, null, "Inventory Access", false, true, true, true, true, true,
-				ItemBuilder.inst().setMaterial(Material.CHEST).setName("&eCan players open inventories?")
-						.setLore(Arrays.asList("&7Define if players can open", "&7chests or other blocks with",
-								"&7inventories on your protection."))
+		super("chestaccess", true, null, null, "Acceso a inventarios", false, true, true, true, true, true,
+				ItemBuilder.inst().setMaterial(Material.CHEST).setName("&#FFD166Abrir inventarios")
+						.setLore(Arrays.asList("&7Permite abrir cofres, barriles, hornos", "&7y otros bloques con inventario.", "", "&7No requiere activar Interactuar."))
 						.build());
 	}
 

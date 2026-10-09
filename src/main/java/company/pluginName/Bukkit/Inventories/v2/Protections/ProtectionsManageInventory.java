@@ -1,23 +1,21 @@
 package company.pluginName.Bukkit.Inventories.v2.Protections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import company.pluginName.API.RoyaleProtectionBlocksAPIImpl;
 import company.pluginName.Bukkit.Inventories.Protections.Banneds.ProtectionBannedsInventory;
-import company.pluginName.Bukkit.Inventories.Protections.Flags.ProtectionFlagsInventory;
 import company.pluginName.Bukkit.Inventories.Protections.Members.ProtectionMembersInventory;
 import company.pluginName.Bukkit.Inventories.Protections.Merge.ProtectionMergeInventory;
 import company.pluginName.Bukkit.Inventories.Protections.Permissions.ProtectionsPermissionsListInventory;
-import company.pluginName.Bukkit.Inventories.Protections.Settings.ProtectionsSettingsListInventory;
 import company.pluginName.Bukkit.Inventories.Protections.Split.ProtectionSplitInventory;
 import company.pluginName.Exceptions.RoyaleProtectionBlocksExceptionImpl;
+import company.pluginName.MainPluginClass;
 import company.pluginName.Modules.FilePckg.Messages;
 import company.pluginName.Modules.PlaceholdersPckg.PlaceholdersService;
 import company.pluginName.Modules.PlayersDataPckg.PlayerDataService;
@@ -30,7 +28,6 @@ import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
 import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
-import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaPrefixedStringField;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
@@ -38,9 +35,10 @@ import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Ite
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.ChestInventoryObject;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.GeneratedItem;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
-import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Listeners.PandaMessageListener.Callback;
-import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Services.PandaMessageListenerService;
 import darkpanda73.PandaUtils.Utilities.Java.Arrays.ArrayUtilities;
+import de.rapha149.signgui.SignGUI;
+import de.rapha149.signgui.SignGUIAction;
+import de.rapha149.signgui.exception.SignGUIVersionException;
 import royale.RoyaleProtectionBlocks.Plugin.API.RoyaleProtectionBlocksAPI;
 import royale.RoyaleProtectionBlocks.Plugin.API.Exceptions.RoyaleProtectionBlocksException;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.PlayerInteractionsService;
@@ -48,14 +46,10 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Obje
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionChangeDisplayItemRequestInput;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionHideBlockRequestInput;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionRenameRequestInput;
-import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionSellRequestInput;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionShowBlockRequestInput;
 
 @Inventory("protections_manage_v2")
 public class ProtectionsManageInventory extends ChestInventoryObject {
-
-	private static final String MESSAGES_TYPENEWNAMEINFO_PATH = "Messages.Type-new-name-info";
-	private static final String MESSAGES_PRICESPECIFYINFO_PATH = "Messages.Price-specify-info";
 
 	private static final String PROTECTIONINFO_CHANGEDISPLAYITEMLORELINE = "Change-display-item-lore-line";
 	private static final String PROTECTIONINFO_RESETDISPLAYITEMLORELINE = "Reset-display-item-lore-line";
@@ -64,10 +58,8 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 
 	private static final String TOGGLEBOUNDARYBUTTON_HIDEBOUNDARYITEM_PATH = "Hide-boundary-item";
 
-	private static final String PRICEBUTTON_NOTSETITEM_PATH = "Not-set-item";
-
 	@PandaInject
-	private static PandaMessageListenerService messageListenerService;
+	private static MainPluginClass plugin;
 
 	@PandaInject
 	private static ProtectionsServiceImpl protectionsService;
@@ -155,12 +147,6 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 				: null;
 	}
 
-	@ItemGenerator("Price-button")
-	private ItemStack generatePriceButton(Item item) {
-		return ItemBuilder.inst().fromMap(item.getData(),
-				this.protection.isForSale() ? Item.DISPLAYITEM_KEY : PRICEBUTTON_NOTSETITEM_PATH).build();
-	}
-
 	@ItemGenerator("Merge-button")
 	private ItemStack generateMergeButton(Item item) {
 		return ProtectionUtilities.canMerge(protection, getPlayer()) ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
@@ -181,6 +167,16 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
+		closeInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
 		goToPreviousInventory();
 	}
 
@@ -189,12 +185,12 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 		if (ProtectionUtilities.canChangeDisplayItem(protection, getPlayer())) {
 			try {
 				if (e.getCursor() != null && e.getCursor().getType() != Material.AIR) {
-					RoyaleProtectionBlocksAPIImpl.getInstance().getPlayerInteractionsService()
+					RoyaleProtectionBlocksAPI.getInstance().getPlayerInteractionsService()
 							.protectionChangeDisplayItemRequest(ProtectionChangeDisplayItemRequestInput
 									.inst(getPlayer(), protection, e.getCursor()));
 					updateInventory();
 				} else if (protection.getDisplayItem() != null) {
-					RoyaleProtectionBlocksAPIImpl.getInstance().getPlayerInteractionsService()
+					RoyaleProtectionBlocksAPI.getInstance().getPlayerInteractionsService()
 							.protectionChangeDisplayItemRequest(
 									ProtectionChangeDisplayItemRequestInput.inst(getPlayer(), protection, null));
 					updateInventory();
@@ -215,38 +211,31 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 		new ProtectionBannedsInventory(getPlayer(), protection).openInventory();
 	}
 
-	@ItemExecutor("Flags-button")
-	private void executeFlagsButton() {
-		new ProtectionFlagsInventory(getPlayer(), protection).openInventory();
-	}
-
 	@ItemExecutor("Rename-button")
 	private void executeRenameButton() {
-		messageListenerService.getListener().replaceListening(getPlayer().getUniqueId(), new Callback() {
-
-			@Override
-			public boolean message(String message) {
-				try {
-					playerInteractionsService.protectionRenameRequest(
-							ProtectionRenameRequestInput.inst(getPlayer(), protection, message));
-					MessageTemplate.inst(Messages.MESSAGE_PROTECTIONS_RENAMEDSUCCESSFULLY.applyPrefix()).process()
-							.sendMessage(getPlayer());
-				} catch (RoyaleProtectionBlocksException e1) {
-					e1.sendError(getPlayer());
-				}
-				return true;
-			}
-
-			public void cancel() {
-				openInventory();
-			}
-
-		});
-		closeInventory();
-		MessageTemplate
-				.inst(PandaPrefixedStringField.applyPrefix(
-						getChestInventoryData().getCustomFields().get(MESSAGES_TYPENEWNAMEINFO_PATH).toString()))
-				.process().sendMessage(getPlayer());
+		getPlayer().closeInventory();
+		try {
+			SignGUI.builder().setLines("", "Escribe arriba", "el nuevo nombre", "de la protección")
+					.setType(Material.OAK_SIGN).callHandlerSynchronously(plugin).setHandler((player, result) -> {
+						String name = result.getLineWithoutColor(0).trim();
+						if (name.isEmpty()) {
+							return Collections.singletonList(SignGUIAction.displayNewLines("", "Escribe arriba",
+									"el nuevo nombre", "de la protección"));
+						}
+						try {
+							playerInteractionsService.protectionRenameRequest(
+									ProtectionRenameRequestInput.inst(getPlayer(), protection, name));
+							MessageTemplate.inst(Messages.MESSAGE_PROTECTIONS_RENAMEDSUCCESSFULLY.applyPrefix())
+									.process().sendMessage(getPlayer());
+						} catch (RoyaleProtectionBlocksException e) {
+							e.sendError(getPlayer());
+						}
+						return Collections.singletonList(SignGUIAction.runSync(plugin, this::openInventory));
+					}).build().open(getPlayer());
+		} catch (SignGUIVersionException e) {
+			e.printStackTrace();
+			openInventory();
+		}
 	}
 
 	@ItemExecutor("Toggle-block-button")
@@ -263,45 +252,6 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 			}
 		} catch (RoyaleProtectionBlocksException e) {
 			e.sendError(getPlayer());
-		}
-	}
-
-	@ItemExecutor("Price-button")
-	private void executePriceButton(Item item, GeneratedItem generatedItem, InventoryClickEvent e) {
-		if (e.getClick() == ClickType.LEFT) {
-			messageListenerService.getListener().replaceListening(getPlayer().getUniqueId(), new Callback() {
-
-				@Override
-				public boolean message(String message) {
-					try {
-						double price = Double.parseDouble(message);
-						try {
-							RoyaleProtectionBlocksAPI.getInstance().getPlayerInteractionsService()
-									.protectionSellRequest(
-											ProtectionSellRequestInput.inst(getPlayer(), protection, price));
-						} catch (RoyaleProtectionBlocksException e) {
-							e.sendError(getPlayer());
-						}
-					} catch (NumberFormatException e1) {
-						MessageTemplate.inst(Messages.ERROR_INVALIDNUMBER.applyPrefix()).process()
-								.sendMessage(e.getWhoClicked());
-					}
-					return true;
-				}
-
-				public void cancel() {
-					openInventory();
-				}
-
-			});
-			closeInventory();
-			MessageTemplate
-					.inst(PandaPrefixedStringField.applyPrefix(
-							getChestInventoryData().getCustomFields().get(MESSAGES_PRICESPECIFYINFO_PATH).toString()))
-					.process().sendMessage(e.getWhoClicked());
-		} else if (e.getClick() == ClickType.RIGHT && this.protection.isForSale()) {
-			this.protection.setPriceAndSave(0);
-			updateInventory();
 		}
 	}
 
@@ -335,14 +285,9 @@ public class ProtectionsManageInventory extends ChestInventoryObject {
 		updateInventory();
 	}
 
-	@ItemExecutor("Permissions-button")
-	private void executePermissionsButton() {
+	@ItemExecutor("Rules-button")
+	private void executeRulesButton() {
 		new ProtectionsPermissionsListInventory(getPlayer(), protection).openInventory();
-	}
-
-	@ItemExecutor("Settings-button")
-	private void executeSettingsButton() {
-		new ProtectionsSettingsListInventory(getPlayer(), protection).openInventory();
 	}
 
 }

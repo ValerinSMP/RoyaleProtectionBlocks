@@ -1,6 +1,7 @@
 package company.pluginName.Bukkit.Inventories.Protections.Members;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BiFunction;
@@ -8,19 +9,24 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.bukkit.Material;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import company.pluginName.Bukkit.Inventories.Shared.ConfirmationInventory;
-import company.pluginName.Bukkit.Inventories.Shared.SearchPlayerInventory;
+import company.pluginName.Bukkit.Inventories.Shared.SearchResultGuard;
+import royale.RoyaleProtectionBlocks.Plugin.API.RoyaleProtectionBlocksAPI;
+import company.pluginName.MainPluginClass;
 import company.pluginName.Exceptions.Exceptions;
 import company.pluginName.Modules.FilePckg.Messages;
 import company.pluginName.Modules.FilePckg.Settings;
 import company.pluginName.Modules.PlayersDataPckg.PlayerDataService;
+import company.pluginName.Modules.PlayersDataPckg.PlayerNameLookupService;
 import company.pluginName.Modules.PlayersDataPckg.Objects.PlayerData;
 import company.pluginName.Modules.PlayersDataPckg.Objects.PlayerData.InvitationRequirement;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionUtilities;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
@@ -35,6 +41,9 @@ import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestIn
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryData;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
+import de.rapha149.signgui.SignGUI;
+import de.rapha149.signgui.SignGUIAction;
+import de.rapha149.signgui.exception.SignGUIVersionException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -47,6 +56,8 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Obje
 
 @Inventory("protections_members")
 public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> {
+	// Preserve the checked-exception bridge used by the installed Valerin API variant.
+	private static void compileExceptionBridge() throws RoyaleProtectionBlocksException { }
 
 	private static final String ENTITY_LEFTCLICKLORELINE_PATH = "Entity.Left-click-lore-line";
 	private static final String ENTITY_RIGHTCLICKLORELINE_PATH = "Entity.Right-click-lore-line";
@@ -80,6 +91,7 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 						.canAddOwner(event.getInventory().protection, event.getInventory().getPlayer())) {
 					new ConfirmationInventory(event.getInventory().getPlayer(), () -> {
 						try {
+							compileExceptionBridge();
 							playerInteractionsService.protectionMemberAddRequest(
 									ProtectionMemberAddRequestInput.inst(event.getInventory().getPlayer(),
 											event.getInventory().protection, event.getEntity(), true));
@@ -98,6 +110,7 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 						event.getInventory().getPlayer())) {
 					new ConfirmationInventory(event.getInventory().getPlayer(), () -> {
 						try {
+							compileExceptionBridge();
 							playerInteractionsService.protectionOwnerRemoveRequest(
 									ProtectionOwnerRemoveRequestInput.inst(event.getInventory().getPlayer(),
 											event.getInventory().protection, event.getEntity()));
@@ -117,6 +130,7 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 					event.getInventory().getPlayer())) {
 				new ConfirmationInventory(event.getInventory().getPlayer(), () -> {
 					try {
+						compileExceptionBridge();
 						playerInteractionsService.protectionMemberRemoveRequest(ProtectionMemberRemoveRequestInput.inst(
 								event.getInventory().getPlayer(), event.getInventory().protection, event.getEntity()));
 					} catch (RoyaleProtectionBlocksException ex) {
@@ -161,9 +175,16 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 
 	@PandaInject
 	private static PandaCachedPlayersService cachedPlayersService;
+	@PandaInject
+	private static PlayerNameLookupService playerNameLookup;
+
+	@PandaInject
+	private static MainPluginClass plugin;
 
 	private Protection protection;
 	private Filter currentFilter = Filter.ALL;
+	private String lastSearch = "Ninguna";
+	private long searchRequest;
 
 	private OptionSet leftClickOptionSet = OptionSet.PRIMARY_OPTION_SET;
 	private OptionSet rightClickOptionSet = OptionSet.SECONDARY_OPTION_SET;
@@ -174,9 +195,17 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 		this.protection = protection;
 
 		setReplacements(new Replacement[] {
-				new Replacement("{protection}", () -> protection.getDisplayName() != null ? protection.getDisplayName()
-						: protection.getProtectionId()) });
+				new Replacement("{protection}", () -> ProtectionDisplayNames.forGui(protection)),
+				new Replacement("{search}", () -> lastSearch),
+				new Replacement("{current_page}", () -> Integer.toString(getCurrentPage())),
+				new Replacement("{max_page}", () -> Integer.toString(getCurrentMaxPage())) });
 		setTitleReplacements(getReplacements());
+	}
+
+	@ItemGenerator("Protection-info")
+	private ItemStack generateProtectionInfo(Item item) {
+		return ItemBuilder.inst().fromMap(item.getData(), Item.DISPLAYITEM_KEY)
+				.apply(protection.getDisplayItemOrDefault().clone());
 	}
 
 	@Override
@@ -270,43 +299,77 @@ public class ProtectionMembersInventory extends PagedChestInventoryObject<UUID> 
 
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
+		closeInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
 		goToPreviousInventory();
 	}
 
 	@ItemExecutor("Search-button")
 	private void executeSearchButton() {
-		closeInventory();
-		new SearchPlayerInventory(getPlayer(), player -> {
-			if (player != null) {
-				try {
-					PlayerData playerData = playerDataService.getPlayerData(player.getUuid(), true);
-
-					if (playerData != null) {
-						if (playerData.getInvitationRequirement() == InvitationRequirement.ALL_DENIED) {
-							throw Exceptions.Protections.Invitations.INVITATIONBLOCKED.generateException();
-						} else if (playerData.getInvitationRequirement() == InvitationRequirement.ALL_ACCEPTED) {
-							playerInteractionsService.protectionMemberAddRequest(
-									ProtectionMemberAddRequestInput.inst(getPlayer(), protection, player.getUuid()));
-						} else {
-							playerInteractionsService.protectionMemberInviteRequest(
-									ProtectionMemberInviteRequestInput.inst(getPlayer(), protection, player.getUuid()));
-
-							MessageTemplate
-									.inst(Messages.MESSAGE_PROTECTIONS_INVITATIONS_INVITEDSUCCESSFULLY.applyPrefix())
-									.process().sendMessage(getPlayer());
+		getPlayer().closeInventory();
+		try {
+			SignGUI.builder().setLines("", "Escribe arriba", "el nombre", "del jugador")
+					.setType(Material.OAK_SIGN).callHandlerSynchronously(plugin).setHandler((player, result) -> {
+						String name = result.getLineWithoutColor(0).trim();
+						if (name.isEmpty()) {
+							return Collections.singletonList(
+									SignGUIAction.displayNewLines("", "Escribe arriba", "el nombre", "del jugador"));
 						}
-					} else {
-						throw Exceptions.Protections.Invitations.UNKNOWN.generateException();
-					}
-
-				} catch (RoyaleProtectionBlocksException e) {
-					e.sendError(getPlayer());
-				}
-				updateEntityList();
-			}
+						lastSearch = name;
+						long request = ++searchRequest;
+						playerNameLookup.find(name).whenComplete((target, error) -> {
+							if (!plugin.isEnabled()) return;
+							Bukkit.getScheduler().runTask(plugin, () -> {
+								if (!SearchResultGuard.isCurrent(request, searchRequest,
+										Bukkit.getPlayer(player.getUniqueId()) == player, player.isOnline(),
+										RoyaleProtectionBlocksAPI.getInstance().getProtectionsService()
+												.findProtectionById(protection.getProtectionId()) == protection,
+										ProtectionUtilities.canAddMember(protection, player))) return;
+								addOrInvite(error == null ? target : null);
+								updateEntityList();
+								openInventory();
+							});
+						});
+						return Collections.emptyList();
+					}).build().open(getPlayer());
+		} catch (SignGUIVersionException e) {
+			Exceptions.Protections.Invitations.UNKNOWN.generateException(e).sendError(getPlayer());
 			openInventory();
-		}, (player) -> !protection.isMainOwner(player.getUuid()) && !protection.isOwner(player.getUuid())
-				&& !protection.isMember(player.getUuid())).openInventory();
+		}
+	}
+
+	private void addOrInvite(PandaCachedPlayer player) {
+		try {
+			if (player == null || protection.isMainOwner(player.getUuid()) || protection.isOwner(player.getUuid())
+					|| protection.isMember(player.getUuid())) {
+				throw Exceptions.Protections.Invitations.UNKNOWN.generateException();
+			}
+
+			PlayerData playerData = playerDataService.getPlayerData(player.getUuid(), true);
+			if (playerData == null) {
+				throw Exceptions.Protections.Invitations.UNKNOWN.generateException();
+			} else if (playerData.getInvitationRequirement() == InvitationRequirement.ALL_DENIED) {
+				throw Exceptions.Protections.Invitations.INVITATIONBLOCKED.generateException();
+			} else if (playerData.getInvitationRequirement() == InvitationRequirement.ALL_ACCEPTED) {
+				playerInteractionsService.protectionMemberAddRequest(
+						ProtectionMemberAddRequestInput.inst(getPlayer(), protection, player.getUuid()));
+			} else {
+				playerInteractionsService.protectionMemberInviteRequest(
+						ProtectionMemberInviteRequestInput.inst(getPlayer(), protection, player.getUuid()));
+				MessageTemplate.inst(Messages.MESSAGE_PROTECTIONS_INVITATIONS_INVITEDSUCCESSFULLY.applyPrefix()).process()
+						.sendMessage(getPlayer());
+			}
+		} catch (RoyaleProtectionBlocksException e) {
+			e.sendError(getPlayer());
+		}
 	}
 
 	@ItemExecutor("Alternate-options-button")

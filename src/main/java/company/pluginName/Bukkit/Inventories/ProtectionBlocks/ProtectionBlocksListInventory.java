@@ -144,4 +144,9 @@ public class ProtectionBlocksListInventory extends PagedChestInventoryObject<Pro
 
 	}
 
+	@ItemExecutor("Close-button")
+	private void executeCloseButton() {
+		closeInventory();
+	}
+
 }

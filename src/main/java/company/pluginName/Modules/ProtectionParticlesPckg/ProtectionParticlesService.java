@@ -1,10 +1,8 @@
 package company.pluginName.Modules.ProtectionParticlesPckg;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -151,8 +149,6 @@ public class ProtectionParticlesService {
 		private List<Protection> currentProtections;
 		private int currentTick;
 
-		private HashMap<String, UUID> magmacubes = new HashMap<>();
-
 		private Message actionBarMessage;
 
 		private @Getter long taskStart = System.currentTimeMillis();
@@ -180,12 +176,6 @@ public class ProtectionParticlesService {
 				this.task.cancel();
 			}
 
-			Player player = Bukkit.getPlayer(this.playerUuid);
-
-			if (player != null && this.service.protocolLibApi.isHooked()) {
-				this.service.protocolLibApi.getHook().removeGlowingMagmaCubes(player,
-						new ArrayList<>(magmacubes.values()));
-			}
 		}
 
 		private void processTick() {
@@ -351,28 +341,6 @@ public class ProtectionParticlesService {
 					.findProtectionsByArea(currentMinLocation, currentMaxLocation).filter(prot -> showAll
 							|| prot.isMember(playerUuid) || prot.isOwner(playerUuid) || prot.isMainOwner(playerUuid))
 					.collect(Collectors.toList());
-
-			if (this.service.protocolLibApi.isHooked()) {
-				if (this.currentProtections != null) {
-					List<UUID> magmaCubesToRemove = currentProtections.stream().map(prot -> {
-						if (!newProtections.contains(prot)) {
-							return this.magmacubes.remove(prot.getProtectionId());
-						}
-						return null;
-					}).filter(Objects::nonNull).collect(Collectors.toList());
-
-					if (!magmaCubesToRemove.isEmpty()) {
-						this.service.protocolLibApi.getHook().removeGlowingMagmaCubes(player, magmaCubesToRemove);
-					}
-				}
-
-				newProtections.forEach(prot -> {
-					if (!this.magmacubes.containsKey(prot.getProtectionId())) {
-						this.magmacubes.put(prot.getProtectionId(), this.service.protocolLibApi.getHook()
-								.spawnGlowingMagmaCube(player, prot.getBukkitLocation().add(0.5D, 0D, 0.5D)));
-					}
-				});
-			}
 
 			this.currentProtections = newProtections;
 		}

@@ -45,7 +45,7 @@ public class ProtectionBlock implements IProtectionBlock {
 
 	@RegisteredPandaField("lang")
 	private static final PandaPrefixedStringField MESSAGE_PROTECTION_BLOCKS_CHARGEDSUCCESSFULLY = new PandaPrefixedStringField(
-			"Message.Protection.Blocks.Charged-successfully", "&aYou've been charged a total amount of &e{amount}$");
+			"Message.Protection.Blocks.Charged-successfully", "&aSe descontaron &e${amount} &ade tu saldo.");
 
 	@PandaInject
 	private static PandaPluginClass plugin;

@@ -1,85 +1,152 @@
-Title: "Protections"
-Size: 27
+Title: "Mis protecciones ({current_page}/{max_page})"
+Size: 54
 Entity:
-  Name: "&e{protection}"
+  Name: "&#FFD166{protection}"
   Lore: 
-  - "&0"
-  - "&a&oWorld: &e{world}"
-  - "&a&oLocation: &ex={location_x},y={location_y},z={location_z}"
-  Teleport-lore-line: " &8- &aLeft click: &eTeleport to protection home"
-  Teleport-not-set-lore-line: " &8- &a&mLeft click&r&a: &7No home set yet"
-  Edit-lore-line: " &8- &aRight click: &eManage protection"
-  Delete-lore-line: " &8- &aRight click + Shift: &eDelete protection"
-  Slots: "0-17"
+  - ""
+  - "&7Mundo: &f{world}"
+  - "&7Ubicación: &f{location_x}, {location_y}, {location_z}"
+  Teleport-lore-line: "&7Click izquierdo: &fir al punto de inicio."
+  Teleport-not-set-lore-line: "&7Punto de inicio sin definir."
+  Edit-lore-line: "&7Click derecho: &fadministrar protección."
+  Delete-lore-line: "&#FF3300Shift + click derecho: eliminar protección."
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
+    Slots: "0-8;45-53"
+  Player-info:
+    Display-item:
+      Type: "CHEST"
+      Amount: 1
+      Name: "&#FFD166Mis protecciones"
+      Lore:
+      - ""
+      - "&7Administra las zonas propias y compartidas."
+    Slots: "4"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "18"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "26"
+    Slots: "50"
   All-filter-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eAll"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&#00FB9A⏺ &aTodas"
+      - "&8⏺ &7Propias"
+      - "&8⏺ &7Compartidas"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmFmYTMxOGFjMDhmNjdhNWJjMjQ0M2QwM2VhZjI0ZWQyMjBkNDNiODMzYjNhZDU3YzNhNDk5Njk4ZmU3ZjUzZCJ9fX0="
-    Slots: "22"
+    Slots: "52"
+    Version: 3
   Own-filter-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eOwn"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todas"
+      - "&#00FB9A⏺ &aPropias"
+      - "&8⏺ &7Compartidas"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGRjYzE4OTYzM2M3ODljYjZkNWU3OGQxM2E1MDQzYjI2ZTdiNDBjZGI3Y2ZjNGUyM2FhMjI3OTU3NDk2N2I0In19fQ=="
-    Slots: "22"
+    Slots: "52"
+    Version: 3
   Others-filter-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eOthers"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todas"
+      - "&8⏺ &7Propias"
+      - "&#00FB9A⏺ &aCompartidas"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjk4YmM2M2YwNWY2Mzc4YmYyOWVmMTBlM2Q4MmFjYjNjZWI3M2E3MjBiZjgwZjMwYmM1NzZkMGFkOGM0MGNmYiJ9fX0="
-    Slots: "22"
+    Slots: "52"
+    Version: 3
   Creation-date-sort-button:
     Display-item:
-      Type: "CLOCK"
+      Type: "COMPARATOR"
       Amount: 1
-      Name: "&aCurrent sort: &eCreation date"
-    Slots: "24"
-    Version: 2
+      Name: "&#FFD166↕ Ordenar"
+      Lore:
+      - ""
+      - "&fOrden seleccionado:"
+      - "&#00FB9A⏺ &aFecha de creación"
+      - "&8⏺ &7Nombre"
+      - "&8⏺ &7Mundo"
+      - ""
+      - "&#FFD166→ Click para cambiar orden"
+    Slots: "53"
+    Version: 3
   Name-sort-button:
     Display-item:
-      Type: "NAME_TAG"
+      Type: "COMPARATOR"
       Amount: 1
-      Name: "&aCurrent sort: &eName"
-    Slots: "24"
-    Version: 2
+      Name: "&#FFD166↕ Ordenar"
+      Lore:
+      - ""
+      - "&fOrden seleccionado:"
+      - "&8⏺ &7Fecha de creación"
+      - "&#00FB9A⏺ &aNombre"
+      - "&8⏺ &7Mundo"
+      - ""
+      - "&#FFD166→ Click para cambiar orden"
+    Slots: "53"
+    Version: 3
   World-sort-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "COMPARATOR"
       Amount: 1
-      Name: "&aCurrent sort: &eWorld"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI4OWQ1YjE3ODYyNmVhMjNkMGIwYzNkMmRmNWMwODVlODM3NTA1NmJmNjg1YjVlZDViYjQ3N2ZlODQ3MmQ5NCJ9fX0="
-    Slots: "24"
-    Version: 2
+      Name: "&#FFD166↕ Ordenar"
+      Lore:
+      - ""
+      - "&fOrden seleccionado:"
+      - "&8⏺ &7Fecha de creación"
+      - "&8⏺ &7Nombre"
+      - "&#00FB9A⏺ &aMundo"
+      - ""
+      - "&#FFD166→ Click para cambiar orden"
+    Slots: "53"
+    Version: 3
   Invitations-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "PAPER"
       Amount: 1
-      Name: "&aInvitations"
+      Name: "&#FFD166Invitaciones"
+      Lore:
+      - "&7Revisa tus invitaciones pendientes."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQ1ZmQxNzRmMjUwMzdiN2Y5ZWNhNzMzY2ZkMDQ2YThiNjM1MTEyMDI2NDg1MzcwNWJjYWE1YjYzZTE3YzE3In19fQ=="
-    Slots: "20"
+    Slots: "46"
     Version: 3
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

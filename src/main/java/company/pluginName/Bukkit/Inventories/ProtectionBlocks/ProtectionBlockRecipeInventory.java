@@ -97,6 +97,11 @@ public class ProtectionBlockRecipeInventory extends ChestInventoryObject {
 		goToPreviousInventory();
 	}
 
+	@ItemExecutor("Close-button")
+	private void executeCloseButton() {
+		closeInventory();
+	}
+
 	@ItemExecutor("Confirm-button")
 	private void executeConfirmButton(Item item, GeneratedItem generatedItem, InventoryClickEvent e) {
 		for (int i = 0; i < 9 && i < recipeSlots.length; i++) {

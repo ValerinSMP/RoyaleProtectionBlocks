@@ -181,6 +181,11 @@ public class ProtectionBlockManageInventory extends ChestInventoryObject {
 		goToPreviousInventory();
 	}
 
+	@ItemExecutor("Close-button")
+	private void executeCloseButton() {
+		closeInventory();
+	}
+
 	@ItemExecutor("Confirm-button")
 	private void executeConfirmButton() {
 		List<Protection> relatedProtections = new ArrayList<>();

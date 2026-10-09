@@ -22,6 +22,7 @@ import darkpanda73.PandaUtils.Services.PandaFilesModule.Annotation.RegisteredPan
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaPrefixedStringField;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.GeneratedItem;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryData;
@@ -41,17 +42,17 @@ public class ProtectionInvitationsInventory extends PagedChestInventoryObject<Pr
 	@RegisteredPandaField("lang")
 	public static final PandaPrefixedStringField MESSAGE_PROTECTIONS_INVITATIONS_ACCEPTEDSUCCESSFULLY = new PandaPrefixedStringField(
 			"Message.Protections.Invitations.Accepted-successfully",
-			"&aThe invitation has been accepted successfully.");
+			"&aAceptaste la invitación correctamente.");
 
 	@RegisteredPandaField("lang")
 	public static final PandaPrefixedStringField MESSAGE_PROTECTIONS_INVITATIONS_REJECTEDSUCCESSFULLY = new PandaPrefixedStringField(
 			"Message.Protections.Invitations.Rejected-successfully",
-			"&aThe invitation has been rejected successfully.");
+			"&aRechazaste la invitación correctamente.");
 
 	@RegisteredPandaField("lang")
 	public static final PandaPrefixedStringField MESSAGE_PROTECTIONS_INVITATIONS_ALLREJECTEDSUCCESSFULLY = new PandaPrefixedStringField(
 			"Message.Protections.Invitations.All-rejected-successfully",
-			"&aAll invitations has been rejected successfully.");
+			"&aRechazaste todas las invitaciones correctamente.");
 
 	private static final String ENTITY_LEFTCLICKLORELINE_PATH = "Entity.Left-click-lore-line";
 	private static final String ENTITY_RIGHTCLICKLORELINE_PATH = "Entity.Right-click-lore-line";
@@ -176,9 +177,19 @@ public class ProtectionInvitationsInventory extends PagedChestInventoryObject<Pr
 		}
 	}
 
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
+		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
-		goToPreviousInventory();
+		closeInventory();
 	}
 
 	@ItemExecutor("Clear-invitations-button")

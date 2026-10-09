@@ -14,6 +14,8 @@ import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
 import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
 import darkpanda73.PandaUtils.Services.PandaMessageListenerModule.Services.PandaMessageListenerService;
 import darkpanda73.PandaUtils.Utilities.Java.Objects.Pair;
@@ -86,6 +88,16 @@ public class AdminProtectionsListFiltersSelectSortInventory extends PagedChestIn
 	@ItemExecutor("Back-button")
 	private void onClickBackButton() {
 		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemExecutor("Close-button")
+	private void onClickCloseButton() {
+		closeInventory();
 	}
 
 }

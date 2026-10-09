@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+import company.pluginName.Bukkit.Inventories.Protections.Flags.ProtectionFlagsInventory;
+import company.pluginName.Bukkit.Inventories.Protections.Permissions.ProtectionsPermissionsListInventory;
 import company.pluginName.Modules.PlaceholdersPckg.PlaceholdersService;
 import company.pluginName.Modules.ProtectionSettingsPckg.ProtectionSettingsService;
 import company.pluginName.Modules.ProtectionSettingsPckg.Objects.Settings.GreetingFarewellMessagesSetting;
@@ -19,6 +21,8 @@ import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
 import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
 import darkpanda73.PandaUtils.Utilities.Java.Arrays.ArrayUtilities;
 import royale.RoyaleProtectionBlocks.Plugin.API.RoyaleProtectionBlocksAPI;
@@ -98,9 +102,35 @@ public class ProtectionsSettingsListInventory extends PagedChestInventoryObject<
 		}
 	}
 
+	@ItemGenerator("Protection-info")
+	private ItemStack generateProtectionInfo(Item item) {
+		return ItemBuilder.inst().fromMap(item.getData(), Item.DISPLAYITEM_KEY)
+				.apply(protection.getDisplayItemOrDefault().clone());
+	}
+
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
+		closeInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
 		goToPreviousInventory();
+	}
+
+	@ItemExecutor("Permissions-tab")
+	private void executePermissionsTab() {
+		new ProtectionsPermissionsListInventory(getPlayer(), protection).openInventory();
+	}
+
+	@ItemExecutor("Environment-tab")
+	private void executeEnvironmentTab() {
+		new ProtectionFlagsInventory(getPlayer(), protection).openInventory();
 	}
 
 }

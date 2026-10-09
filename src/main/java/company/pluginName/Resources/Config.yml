@@ -69,6 +69,13 @@ Discord:
     - "chest-access"
     
 Settings: 
+
+  Network:
+    # Sync can load the shared protection list without registering regions or allowing changes.
+    View-only: false
+    # Proxy server name that owns the protection worlds.
+    Home-server: "survival"
+    Pending-teleport-expiration-seconds: 120
   
   #---
   # Enable if you wish to get a notification on the console if there's a new update

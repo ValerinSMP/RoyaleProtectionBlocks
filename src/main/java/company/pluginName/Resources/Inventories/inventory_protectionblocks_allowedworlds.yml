@@ -1,44 +1,61 @@
-Title: "{block} > Allowed Worlds"
-Size: 27
+Title: "Mundos permitidos ({current_page}/{max_page})"
+Size: 54
 Entity:
   Type: "PLAYER_HEAD"
-  Name: "&e{world}"
+  Name: "&#FFD166{world}"
   Lore:
-  - "&8[&cClick to remove world&8]"
+  - "&#FF3300Click para quitar este mundo."
   Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY5MTk2YjMzMGM2Yjg5NjJmMjNhZDU2MjdmYjZlY2NlNDcyZWFmNWM5ZDQ0Zjc5MWY2NzA5YzdkMGY0ZGVjZSJ9fX0="
-  Slots: "0-17"
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
-  Close-button:
+    Slots: "0-3;5-8;45-48;50-53"
+  Block-info:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "GRASS_BLOCK"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FFD166{block}"
+      Lore:
+      - ""
+      - "&7Bloque que estás editando."
+    Slots: "4"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
+      Amount: 1
+      Name: "&#FFD166← Volver"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+    Slots: "45"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "21"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "23"
+    Slots: "50"
   Search-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eSearch for a new allowed world"
+      Name: "&#00FB9AAñadir mundo"
+      Lore:
+      - "&7Busca un mundo para permitirlo."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMzNWU4Njg0YzdmNzc2YmVmZWRjNDMxOWQwODE0OGM1NGJlYTM5MzIxZTFiZDVkZWY3YTU1Yjg5ZmRhYTA5OSJ9fX0="
-    Slots: "22"
+    Slots: "53"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

@@ -13,6 +13,7 @@ import company.pluginName.API.RoyaleProtectionBlocksAPIImpl;
 import company.pluginName.Exceptions.Exceptions.Protections;
 import company.pluginName.Hooks.PlaceholderAPI.PlaceholderAPI;
 import company.pluginName.Modules.FilePckg.Messages;
+import company.pluginName.Modules.FilePckg.Settings;
 import company.pluginName.Modules.PlayerInteractionsPckg.PlayerInteractionsServiceImpl;
 import company.pluginName.Modules.PlayersDataPckg.PlayerDataService;
 import company.pluginName.Modules.ProtectionBlocksPckg.ProtectionBlocksService;
@@ -94,6 +95,11 @@ public class EventsUtils {
 
 				if (protectionBlock == null) {
 					return BlockPlaceResult.IGNORE;
+				}
+
+				if (Settings.SETTINGS_NETWORK_VIEWONLY.isTrue()) {
+					Protections.PERMISSIONDENIED.generateException().sendError(player);
+					return BlockPlaceResult.CANCEL;
 				}
 
 				if (prot != null) {

@@ -1,42 +1,54 @@
-Title: "Protection Blocks"
-Size: 27
+Title: "Bloques de protección ({current_page}/{max_page})"
+Size: 54
 Entity:
   Lore: 
-  - "&0"
-  - "&a&oBlock ID: &e{block_id}"
-  - "&a&oBlock size: &e{blocks_x}x{blocks_y}x{blocks_z}"
-  - "&a&oAllowed worlds: &e{block_allowed_worlds}"
-  - "&a&oPermission: &e{block_permission}"
-  - "&a&oPrice: &e{block_price}$"
-  Copy-lore-line: " &8&o- &aLeft click: &eGet a copy"
-  Edit-lore-line: " &8&o- &aLeft click + Shift: &eEdit the block"
-  Remove-lore-line: " &8&o- &aRight click: &eRemove the block"
-  Slots: "0-17"
+  - ""
+  - "&7ID: &f{block_id}"
+  - "&7Tamaño: &f{blocks_x}x{blocks_y}x{blocks_z}"
+  - "&7Mundos permitidos: &f{block_allowed_worlds}"
+  - "&7Permiso: &f{block_permission}"
+  - "&7Precio: &#FFD166${block_price}"
+  Copy-lore-line: "&7Click izquierdo: &fobtener una copia."
+  Edit-lore-line: "&7Shift + click izquierdo: &feditar el bloque."
+  Remove-lore-line: "&#FF3300Click derecho: eliminar el bloque."
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
+    Slots: "0-8;45-53"
+  Menu-info:
+    Display-item:
+      Type: "GRASS_BLOCK"
+      Amount: 1
+      Name: "&#FFD166Bloques de protección"
+    Slots: "4"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "18"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "26"
+    Slots: "50"
   Create-block-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "LIME_DYE"
       Amount: 1
-      Name: "&eCreate a new protection block"
+      Name: "&#00FB9ACrear bloque de protección"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDdhMGZjNmRjZjczOWMxMWZlY2U0M2NkZDE4NGRlYTc5MWNmNzU3YmY3YmQ5MTUzNmZkYmM5NmZhNDdhY2ZiIn19fQ=="
-    Slots: "22"
+    Slots: "53"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

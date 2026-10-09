@@ -24,101 +24,104 @@
 
 Version: 3
 
-Prefix: "&d&lRoyale&fProtectionBlocks >>&r&7 "
+Prefix: "&8[&#FF3300ᴘʀᴏᴛᴇᴄᴄɪᴏɴᴇꜱ&8] &7"
 
 Message: 
   
-  Reload: "&aThe plugin has been reloaded successfully."
-  Set-spawn-successfully: "&aA new spawn has ben set successfully."
+  Reload: "&aEl plugin se recargó correctamente."
+  Set-spawn-successfully: "&aEl punto de aparición fue actualizado."
   
   General: 
-    No-limit: "No limit"
+    No-limit: "Sin límite"
   
   Protections: 
-    Created-successfully: "&aThe protection has been created successfully!"
-    Removed-successfully: "&aThe protection has been removed successfully!"
-    Home-set-successfully: "&aThe protection's home has been set successfully!"
-    ID-set-successfully: "&aThe protection's custom ID has been set successfully!"
-    Renamed-successfully: "&aThe protection's name has been changed successfully!"
-    Hidden-successfully: "&aThe protection block has been hidden successfully!"
-    Shown-successfully: "&aThe protection block has been shown successfully!"
-    Kicked: "&cYou've been kicked from this protection."
-    Banned: "&cYou've been banned from this protection."
-    Player-not-in-protection: "&cThis player is not currently inside this protection."
-    Player-with-kick-bypass: "&cYou can't kick this player due his permissions."
-    Player-kicked: "&aThe player has been kicked from this protection successfully!"
-    Left-successfully: "&aYou have left the protection successfully!"
+    Created-successfully: "&aLa protección fue creada correctamente."
+    Removed-successfully: "&aLa protección fue eliminada correctamente."
+    Home-set-successfully: "&aEl punto de inicio de la protección fue establecido."
+    ID-set-successfully: "&aEl ID personalizado de la protección fue actualizado."
+    Renamed-successfully: "&aEl nombre de la protección fue actualizado."
+    Hidden-successfully: "&aEl bloque de protección fue ocultado."
+    Shown-successfully: "&aEl bloque de protección fue mostrado."
+    Kicked: "&cFuiste expulsado de esta protección."
+    Banned: "&cFuiste bloqueado de esta protección."
+    Player-not-in-protection: "&cEse jugador no está dentro de la protección."
+    Player-with-kick-bypass: "&cNo puedes expulsar a ese jugador por sus permisos."
+    Player-kicked: "&aEl jugador fue expulsado de la protección."
+    Left-successfully: "&aSaliste de la protección correctamente."
     
     Flags: 
       Flag-name: "&e{flag} &8[&7{value}&8]"
-      Allow-value-name: "&aAllow"
-      Deny-value-name: "&cDeny"
+      Allow-value-name: "&aPermitir"
+      Deny-value-name: "&cDenegar"
       String-value-name: "&b{text}"
-      Not-defined-name: "&7Not defined"
+      Not-defined-name: "&7Sin definir"
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
     
     Members: 
-      Added-successfully: "&aThe new member has been added to the protection successfully!"
-      Removed-successfully: "&aThe member has been removed to the protection successfully!"
+      Added-successfully: "&aEl jugador fue añadido como miembro."
+      Removed-successfully: "&aEl miembro fue expulsado de la protección."
     
     Owners: 
-      Added-successfully: "&aThe new owner has been added to the protection successfully!"
-      Removed-successfully: "&aThe owner has been removed to the protection successfully!"
+      Added-successfully: "&aEl jugador fue añadido como propietario."
+      Removed-successfully: "&aEl propietario fue retirado de la protección."
     
     Banneds: 
-      Added-successfully: "&aThe player has been banned from the protection successfully!"
-      Removed-successfully: "&aThe player has been unbanned from the protection successfully!"
+      Added-successfully: "&aEl jugador fue bloqueado de la protección."
+      Removed-successfully: "&aEl jugador fue desbloqueado de la protección."
     
     Blocks: 
-      Created-successfully: "&aThe protection block has been created successfully!"
-      Saved-successfully: "&aThe protection block changes has been saved successfully!"
-      Removed-successfully: "&aThe protection block has been removed successfully!"
+      Created-successfully: "&aEl tipo de bloque de protección fue creado."
+      Saved-successfully: "&aLos cambios del bloque de protección fueron guardados."
+      Removed-successfully: "&aEl tipo de bloque de protección fue eliminado."
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
+
+    Invitations:
+      Member-accepted: "&aEl jugador &e{player_name} &aaceptó la invitación a tu protección &e{protection_name}&a."
+      Accepted-successfully: "&aAceptaste la invitación correctamente."
+      Rejected-successfully: "&aRechazaste la invitación correctamente."
+      All-rejected-successfully: "&aRechazaste todas las invitaciones correctamente."
+      Invitation-received: "&eRecibiste una invitación a una protección. Usa &a{command} &epara responder."
+      Invited-successfully: "&aEl jugador recibió la invitación correctamente."
+
+    Permissions:
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
+
+    Settings:
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
+
+    Display-item-changed-successfully: "&aEl icono de la protección fue actualizado."
   
   Transfer: 
-    Available-list: "&7Available protection plugins to transfer from: &f{list}"
-    Protection-stones-not-loaded: "&cProtectionStones is not loaded. Please load ProtectionStones to
-      transfer its data."
-    Warning: "&7You're about to transfer all the data from another plugin to RoyaleProtectionBlocks.
-      Once it starts, it's not recomended to stop the server. This process
-      may remove the old regions and lead to losing some in case their
-      transfer fails. Remember to keep a backup of the WorldGuard and desired
-      plugin folder in case something goes wrong. Make sure to remove the
-      plugin you want to transfer from once the transfer finishes, as it
-      can lead to unexpected behaviors if there are two protection plugins.
-      Please, type &e{command} &7to confirm your choice."
-    Start: "&7Starting transfer process..."
-    End: "&7Transfer finished! Remember to check the results and, if everything
-      went okey, remove the old protection plugin."
+    Available-list: "&7Plugins de protección disponibles para migrar: &f{list}"
+    Protection-stones-not-loaded: "&cProtectionStones no está cargado. Debes cargarlo para migrar sus datos."
+    Warning: "&7Vas a migrar todos los datos desde otro plugin. No detengas el servidor durante el proceso y conserva una copia de seguridad de WorldGuard y del plugin anterior. Escribe &e{command} &7para confirmar."
+    Start: "&7Iniciando migración..."
+    End: "&7Migración finalizada. Revisa los resultados antes de retirar el plugin anterior."
     Result: 
     - ""
-    - "&eTransfer result: "
+    - "&eResultado de la migración: "
     - ""
-    - "&e  - &aTransferred protection blocks: {transferred_protection_blocks}"
-    - "&e  - &cFailed protection blocks: {failed_protection_blocks}"
+    - "&e  - &aBloques migrados: {transferred_protection_blocks}"
+    - "&e  - &cBloques fallidos: {failed_protection_blocks}"
     - ""
-    - "&e  - &aTransferred protections: {transferred_protections}"
-    - "&e  - &cFailed protections: {failed_protections}"
+    - "&e  - &aProtecciones migradas: {transferred_protections}"
+    - "&e  - &cProtecciones fallidas: {failed_protections}"
     - ""
-    - "&e  - &aRequired time: {required_time} ms"
-    - "&e  - &cErrors in console: {errors_in_console}"
+    - "&e  - &aTiempo requerido: {required_time} ms"
+    - "&e  - &cErrores en consola: {errors_in_console}"
     - ""
   
   Purge: 
-    Warning: "&7You're about to delete a total amount of &e{amount} &7protection(s) depending on the player's last playtime,
-      some protections may be lost if any error occurs. If there may be
-      some important protections you want to prevent from being removed,
-      remember to make a backup just in case. Please, type &e{command}
-      &7to confirm your choice."
-    Search: "&7Searching matching protections..."
-    Start: "&7Starting purge process..."
-    End: "&aPurge finished! A total amount of &e{amount} &aprotection(s) has been purged."
-    Error: "&7A total amount of &e{amount} protection(s)
-      couldn't be purged. Check the console to see the related errors."
-    Export-end: "&aExportation finished! A total amount of &e{amount} &aprotection(s) has been found and exported to a
-      new JSON file called '&e{file}' on your plugin's directory."
+    Warning: "&7Vas a eliminar &e{amount} &7protecciones según la última conexión de sus propietarios. Conserva una copia de seguridad y escribe &e{command} &7para confirmar."
+    Search: "&7Buscando protecciones coincidentes..."
+    Start: "&7Iniciando limpieza..."
+    End: "&aLimpieza terminada. Se eliminaron &e{amount} &aprotecciones."
+    Error: "&7No se pudieron eliminar &e{amount} &7protecciones. Revisa la consola."
+    Export-end: "&aSe exportaron &e{amount} &aprotecciones al archivo &e{file}&a."
   
   Files: 
-    Exported-successfully: "All the data has been exported successfully!"
-    Imported-successfully: "All the data has been imported successfully!"
+    Exported-successfully: "Todos los datos fueron exportados correctamente."
+    Imported-successfully: "Todos los datos fueron importados correctamente."
   
   Helper: 
     Available-left-arrow: "&e«"
@@ -137,56 +140,60 @@ Message:
     - "&c・。・。・。・。・。・。・。・。・。・。・。・。・。・。・。・。・"
     - " "
     Error: 
-      Not-a-number: "&cYou must specify a valid number!"
+      Not-a-number: "&cDebes indicar un número válido."
+
+  Teleport:
+    Transferring: "&7Enviándote al servidor de tu protección..."
+    Unsafe-warning-title: "&cUbicación insegura"
+    Unsafe-warning-description:
+    - "&7El destino no parece tener una plataforma segura"
+    - "&7o contiene elementos peligrosos."
+    - "&7Podrías recibir daño al llegar."
+    - "&7¿Quieres teletransportarte de todos modos?"
 
 Error: 
   
-  Error: "&cError!"
-  Console-denied: "&cYou can't use this commands in console!"
-  Player-not-found: "&cThe specified player couldn't be found!"
-  No-item-in-hand: "&cYou must have an item in your hand!"
-  Not-a-block: "&cThe item must be a block!"
-  Inventory-full: "&cYou don't have enough space on your inventory!"
-  Insufficient-balance: "&cYou don't have enough balance to purchase this!"
-  Invalid-number: "&cYou must specify a valid number!"
-  Number-below-zero: "&cYou must specify a number higher than or equal to zero!"
-  Set-spawn-error: "&cThere was an error trying to specify a new spawn. Check the console!"
+  Error: "&cOcurrió un error."
+  Console-denied: "&cEste comando no puede usarse desde la consola."
+  Player-not-found: "&cNo se encontró al jugador indicado."
+  No-item-in-hand: "&cDebes tener un objeto en la mano."
+  Not-a-block: "&cEl objeto debe ser un bloque."
+  Inventory-full: "&cNo tienes espacio suficiente en el inventario."
+  Insufficient-balance: "&cNo tienes saldo suficiente para comprar esto."
+  Invalid-number: "&cDebes indicar un número válido."
+  Number-below-zero: "&cDebes indicar un número igual o mayor que cero."
+  Set-spawn-error: "&cNo se pudo establecer el punto de aparición. Revisa la consola."
   
   Chat-prompt: 
-    Already-prompted: "&cYou've already a pending type operation!"
+    Already-prompted: "&cYa tienes una operación de escritura pendiente."
   
   Files: 
-    Export: "&cThere was an issue trying to export the data! Check the console
-      for more information."
-    Import: "&cThere was an issue trying to import the data! Check the console
-      for more information."
+    Export: "&cNo se pudieron exportar los datos. Revisa la consola."
+    Import: "&cNo se pudieron importar los datos. Revisa la consola."
   
   Purge: 
-    Invalid-parameter: "&cYou must specify a valid parameter! (Available:
-      --days, --hours, --minutes, --config, --show-ignored-players, --export-only)"
-    No-value-for-parameter: "&cYou must specify a value for the parameter!"
+    Invalid-parameter: "&cDebes indicar un parámetro válido: --days, --hours, --minutes, --config, --show-ignored-players o --export-only."
+    No-value-for-parameter: "&cDebes indicar un valor para el parámetro."
   
   Protections: 
-    Not-found: "&cThe specified protection could not be found!"
-    Not-inside-protection: "&cYou're not inside any protection!"
-    Banned-world: "&cYou can't use protection blocks in this world!"
-    Not-allowed-world: "&cYou can't use this protection block in this world!"
-    Not-main-owner: "&cYou're not the main owner of this protection!"
-    Not-owner: "&cYou're not an owner of this protection!"
-    Not-member: "&cYou're not a member of this protection!"
-    Permission-denied: "&cYou don't have permissions to use this protection block!"
-    Block-already-hidden: "&cThe protection block is already hidden!"
-    Block-already-shown: "&cThe protection block is already shown!"
-    Blocked-by-block: "&cThere's another block where the protection block should be placed!"
-    Same-item-as-protection: "&cYou can't place items of the same type as the protection block
-      where the protection block is originally placed!"
-    Leave-denied-to-main-owner: "&cYou can't leave your own protection!"
+    Not-found: "&cNo se encontró la protección indicada."
+    Not-inside-protection: "&cNo estás dentro de una protección."
+    Banned-world: "&cNo puedes usar bloques de protección en este mundo."
+    Not-allowed-world: "&cEste bloque de protección no puede usarse en este mundo."
+    Not-main-owner: "&cNo eres el propietario principal de esta protección."
+    Not-owner: "&cNo eres propietario de esta protección."
+    Not-member: "&cNo eres miembro de esta protección."
+    Permission-denied: "&cNo tienes permiso para usar este bloque de protección."
+    Block-already-hidden: "&cEl bloque de protección ya está oculto."
+    Block-already-shown: "&cEl bloque de protección ya está visible."
+    Blocked-by-block: "&cHay otro bloque donde debería aparecer la protección."
+    Same-item-as-protection: "&cNo puedes colocar un bloque del mismo tipo en la posición original de la protección."
+    Leave-denied-to-main-owner: "&cNo puedes abandonar tu propia protección."
     Blocks: 
-      Not-found: "&cThere's no protection block with this ID!"
-      Not-for-sale: "&cThis protection block is currently not for sale!"
+      Not-found: "&cNo existe un bloque de protección con ese ID."
+      Not-for-sale: "&cEste bloque de protección no está a la venta."
   
   Commands: 
-    Permission-denied: "&cYou don't have permissions to use this command!"
-    Pending-command: "&cYou have a command still executing!"
-    Cooldown-active: "&cYou have to wait for the next &e%seconds% seconds &cto execute
-      this command again!"
+    Permission-denied: "&cNo tienes permiso para usar este comando."
+    Pending-command: "&cTodavía tienes un comando en ejecución."
+    Cooldown-active: "&cDebes esperar &e%seconds% segundos &cpara volver a usar este comando."

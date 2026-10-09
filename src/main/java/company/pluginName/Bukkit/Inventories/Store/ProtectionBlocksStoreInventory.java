@@ -123,9 +123,19 @@ public class ProtectionBlocksStoreInventory extends PagedChestInventoryObject<Pr
 		}
 	}
 
+	@ItemExecutor("Back-button")
+	private void onClickBackButton() {
+		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
 	@ItemExecutor("Close-button")
 	private void onClickCloseButton() {
-		goToPreviousInventory();
+		closeInventory();
 	}
 
 	@ItemGenerator("All-filter-button")

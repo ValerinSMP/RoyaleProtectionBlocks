@@ -18,6 +18,7 @@ import company.pluginName.Modules.FilePckg.Messages;
 import company.pluginName.Modules.PermissionsPckg.PermissionsService;
 import company.pluginName.Modules.PlayerGuardPckg.PlayerGuardService;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import company.pluginName.Modules.ProtectionsPurgePckg.ProtectionsPurgeService;
 import company.pluginName.Modules.SettingsPckg.SettingsService;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
@@ -75,9 +76,7 @@ public class PlaceholdersService {
 
 	public static final List<Pair<String, Function<IProtection, String>>> PROTECTION_PLACEHOLDERS = Arrays.asList(
 			Pair.of("{protection_id}", (protection) -> protection.getProtectionId()),
-			Pair.of("{protection_name}",
-					(protection) -> protection.getDisplayName() != null ? protection.getDisplayName()
-							: protection.getProtectionId()),
+			Pair.of("{protection_name}", ProtectionDisplayNames::forGui),
 			Pair.of("{protection_owner}", (protection) -> protection.getOwnerName()),
 			Pair.of("{protection_owner_last_played}",
 					(protection) -> DATE_FORMAT.format(new Date(protection.getOwnerLastPlayed()))),

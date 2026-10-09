@@ -14,6 +14,7 @@ import company.pluginName.Modules.ProtectionBlocksPckg.ProtectionBlocksService;
 import company.pluginName.Modules.ProtectionBlocksPckg.Objects.ProtectionBlock;
 import company.pluginName.Modules.ProtectionFlagsPckg.ProtectionFlagsService;
 import company.pluginName.Modules.ProtectionPermissionsPckg.ProtectionPermissionsService;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Annotation.RegisteredPandaField;
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaStringField;
@@ -163,8 +164,7 @@ public class PlaceHolder extends PlaceholderExpansion {
 				case "protection_name":
 					protection = getProtectionIn(player);
 					if (protection != null) {
-						return protection.getDisplayName() != null ? protection.getDisplayName()
-								: protection.getProtectionId();
+						return ProtectionDisplayNames.forGui(protection);
 					}
 					break;
 				case "protection_public_access":

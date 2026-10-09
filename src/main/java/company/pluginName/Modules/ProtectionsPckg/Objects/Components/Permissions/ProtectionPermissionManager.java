@@ -12,6 +12,7 @@ import company.pluginName.Modules.PlayersDataPckg.PlayerDataService;
 import company.pluginName.Modules.PlayersDataPckg.Objects.PlayerData;
 import company.pluginName.Modules.ProtectionPermissionsPckg.ProtectionPermissionsService;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionPvpBridge;
 import company.pluginName.Modules.SQLPckg.SQLService;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
 import darkpanda73.PandaUtils.PandaPlugin.Utils.TasksUtils;
@@ -63,11 +64,24 @@ public class ProtectionPermissionManager {
 			return;
 		}
 
+		if ("pvp".equals(permission.getId())) {
+			boolean visitors = Boolean.TRUE.equals(getValue(permission, PermissionGroup.NON_MEMBERS));
+			boolean members = Boolean.TRUE.equals(getValue(permission, PermissionGroup.MEMBERS));
+			boolean owners = Boolean.TRUE.equals(getValue(permission, PermissionGroup.OWNERS));
+			try {
+				protection.performAllProtections(child -> ProtectionPvpBridge.synchronize(
+						((Protection) child).getProtectedRegion(), visitors, members, owners));
+			} catch (Throwable failure) {
+				throw new IllegalStateException("Could not synchronize protection PvP flag", failure);
+			}
+		}
+
 		TasksUtils.executeOnAsync(() -> {
 			try {
 				sqlService.saveProtectionPermission(protection.getProtectionId(), protectionPermission);
-			} catch (RoyaleProtectionBlocksExceptionImpl e) {
-				e.sendError(Bukkit.getConsoleSender());
+			} catch (Exception e) {
+				Bukkit.getLogger().log(java.util.logging.Level.SEVERE,
+						"Could not save protection permission", e);
 			}
 		});
 	}

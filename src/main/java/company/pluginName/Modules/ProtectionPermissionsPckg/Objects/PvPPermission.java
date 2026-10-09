@@ -13,9 +13,8 @@ public class PvPPermission extends PermissionImpl {
 
 	public PvPPermission() {
 		super("pvp", true, null, null, "PvP", true, true, true, true, true, true,
-				ItemBuilder.inst().setMaterial(Material.DIAMOND_SWORD).setName("&eCan players attack each other?")
-						.setLore(Arrays.asList("&7Define if players can attack", "&7each other. Both must be allowed",
-								"&7to attack in order to fight."))
+				ItemBuilder.inst().setMaterial(Material.DIAMOND_SWORD).setName("&#FFD166Combate entre jugadores")
+						.setLore(Arrays.asList("&7Permite atacar a otros jugadores.", "&7Ambos deben tenerlo habilitado."))
 						.build());
 	}
 

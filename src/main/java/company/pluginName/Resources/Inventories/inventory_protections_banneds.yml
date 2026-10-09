@@ -1,41 +1,101 @@
-Title: "{protection} > Banneds"
-Size: 27
+Title: "Bloqueados ({current_page}/{max_page})"
+Size: 54
 Entity:
-  Name: "&e{player}"
-  Delete-lore-line: "&8[&cClick to remove banned&8]"
-  Slots: "0-17"
+  Name: "&#FF3300{player}"
+  Delete-lore-line: "&#FF3300Click para desbloquear al jugador."
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
-  Close-button:
+    Slots: "0-3;5-8;45-48;50-51"
+  Protection-info:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "CHEST"
       Amount: 1
-      Name: "&cClose"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+      Name: "&#FFD166{protection}"
+      Lore:
+      - ""
+      - "&7Protección que estás editando."
+    Slots: "4"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
+      Amount: 1
+      Name: "&#FFD166← Volver"
+    Slots: "45"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "21"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "23"
+    Slots: "50"
   Search-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eSearch for a new banned"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMzNWU4Njg0YzdmNzc2YmVmZWRjNDMxOWQwODE0OGM1NGJlYTM5MzIxZTFiZDVkZWY3YTU1Yjg5ZmRhYTA5OSJ9fX0="
-    Slots: "22"
+      Name: "&#FF3300Bloquear jugador"
+      Lore:
+      - "&7Impide que un jugador entre"
+      - "&7a esta protección."
+      - ""
+      - "&7Búsqueda actual: &f{search}"
+    Slots: "53"
+  All-filter-button:
+    Display-item:
+      Type: "HOPPER"
+      Amount: 1
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&#00FB9A⏺ &aTodos"
+      - "&8⏺ &7Conectados"
+      - "&8⏺ &7Desconectados"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
+  Online-filter-button:
+    Display-item:
+      Type: "HOPPER"
+      Amount: 1
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todos"
+      - "&#00FB9A⏺ &aConectados"
+      - "&8⏺ &7Desconectados"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
+  Offline-filter-button:
+    Display-item:
+      Type: "HOPPER"
+      Amount: 1
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todos"
+      - "&8⏺ &7Conectados"
+      - "&#00FB9A⏺ &aDesconectados"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

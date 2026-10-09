@@ -10,9 +10,9 @@ import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 public class BreakPermission extends PermissionImpl {
 
 	public BreakPermission() {
-		super("break", true, null, null, "Break blocks", false, true, true, true, true, true, ItemBuilder.inst()
-				.setMaterial(Material.DIAMOND_PICKAXE).setName("&eCan players break blocks on your protection?")
-				.setLore(Arrays.asList("&7Define if players can break", "&7blocks on your protection.")).build());
+		super("break", true, null, null, "Romper bloques", false, true, true, true, true, true, ItemBuilder.inst()
+				.setMaterial(Material.DIAMOND_PICKAXE).setName("&#FFD166Romper bloques")
+				.setLore(Arrays.asList("&7Permite destruir bloques dentro", "&7de la protección.")).build());
 	}
 
 	@Override

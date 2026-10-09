@@ -54,12 +54,19 @@ public class MainPluginClass extends PandaPluginClass {
 	@Override
 	public void onAfterEnablePlugin() {
 		super.onAfterEnablePlugin();
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
 		if (!protocolLibApi.isHooked()) {
 			MessageTemplate.inst(PandaPrefixedStringField.applyPrefix(
 					"&cProtocolLib could not be found. This will affect some features, like the '/pb view' command, which won't show the glowing blocks to indicate where protections are located."))
 					.process().sendMessage(Bukkit.getConsoleSender());
 		}
+	}
+
+	@Override
+	public void onBeforeDisablePlugin() {
+		getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
+		super.onBeforeDisablePlugin();
 	}
 
 }

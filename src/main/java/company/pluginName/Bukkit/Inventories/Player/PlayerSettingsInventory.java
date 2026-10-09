@@ -102,9 +102,9 @@ public class PlayerSettingsInventory extends ChestInventoryObject {
 		updateInventory();
 	}
 
-	@ItemExecutor("Back-button")
-	private void onClickBackButton() {
-		goToPreviousInventory();
+	@ItemExecutor("Close-button")
+	private void onClickCloseButton() {
+		closeInventory();
 	}
 
 	@Override

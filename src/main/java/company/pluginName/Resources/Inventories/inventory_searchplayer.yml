@@ -1,44 +1,56 @@
-Title: "Select a player"
+Title: "Seleccionar jugador ({current_page}/{max_page})"
 Size: 54
 Messages:
-  Player-search-info: "&7Type the name of the player you're looking for. Type 'cancel' to cancel this action."
-  Already-in-prompt: "&cYou've already a pending type operation! Type 'cancel' to cancel the previous operation."
-  Player-not-found: "&cThe specified player couldn't be found!"
+  Player-search-info: "&7Escribe el nombre del jugador. Escribe 'cancel' para salir."
+  Already-in-prompt: "&#FFC43BYa tienes una búsqueda pendiente. Escribe 'cancel' para detenerla."
+  Player-not-found: "&#FF3300No se encontró ese jugador."
 Entity:
-  Name: "&e{playername}"
-  Slots: "0-44"
+  Name: "&#FFD166{playername}"
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "45-53"
-  Previous-page-button: 
-    Display-item: 
+    Slots: "0-8;45-53"
+  Menu-info:
+    Display-item:
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166Seleccionar jugador"
+    Slots: "4"
+  Previous-page-button: 
+    Display-item: 
+      Type: "ARROW"
+      Amount: 1
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "45"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
       Type: "PLAYER_HEAD"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "53"
+    Slots: "50"
   Search-specific-player: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eSearch for an specific player"
+      Name: "&#FFD166Buscar jugador"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMzNWU4Njg0YzdmNzc2YmVmZWRjNDMxOWQwODE0OGM1NGJlYTM5MzIxZTFiZDVkZWY3YTU1Yjg5ZmRhYTA5OSJ9fX0="
-    Slots: "50"
-  Close-button: 
+    Slots: "53"
+  Back-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FFD166← Volver"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "48"
+    Slots: "45"
+  Close-button:
+    Display-item:
+      Type: "BARRIER"
+      Amount: 1
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

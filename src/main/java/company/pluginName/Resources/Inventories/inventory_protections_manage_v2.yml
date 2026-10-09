@@ -1,117 +1,125 @@
-Title: "{protection_name}"
-Size: 36
-Messages:
-  Type-new-name-info: "&7Type the new name for the protection. Type 'cancel' to cancel this action."
-  Price-specify-info: "&7Type the price you wish to set on your protection block. Type 'cancel' to cancel this action."
+Title: "Protección | {protection_name}"
+Size: 54
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "0-35"
-  Flags-button:
+    Slots: "0-3;5-8;45-48;50-51"
+  Back-button:
     Display-item:
-      Type: "OAK_SIGN"
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&eFlags"
-    Slots: "10"
+      Name: "&#FFD166← Volver"
+    Slots: "45"
   Members-button:
     Display-item:
-      Type: "CHEST"
+      Type: "CHEST_MINECART"
       Amount: 1
-      Name: "&eMembers"
-    Slots: "11"
+      Name: "&#FFD166Miembros"
+      Lore:
+      - "&7Administra quién puede usar"
+      - "&7esta protección."
+    Slots: "21"
   Banneds-button:
     Display-item:
       Type: "TNT_MINECART"
       Amount: 1
-      Name: "&eBanneds"
-    Slots: "12"
+      Name: "&#FF3300Jugadores bloqueados"
+      Lore:
+      - "&7Revisa los jugadores sin acceso"
+      - "&7a esta protección."
+    Slots: "22"
   Rename-button:
     Display-item:
       Type: "NAME_TAG"
       Amount: 1
-      Name: "&eRename protection"
-    Slots: "14"
-  Price-button:
-    Display-item:
-      Type: "EMERALD"
-      Name: "&aCurrent price: &e{protection_price}"
-    Not-set-item:
-      Type: "EMERALD"
-      Name: "&aCurrent price: &7&oNot for sale"
-    Slots: "15"
+      Name: "&#FFD166Cambiar nombre"
+      Lore:
+      - "&7Personaliza el nombre visible"
+      - "&7de esta protección."
+    Slots: "52"
   Merge-button:
     Display-item:
       Type: "SLIME_BLOCK"
       Amount: 1
-      Name: "&eMerge protection"
+      Name: "&#FFD166Fusionar protección"
       Lore:
-      - "&8&o- &aLeft-click: &eSet parent protection"
-      - "&8&o- &aRight-click: &eRemove child protections"
-    Slots: "16"
+      - "&7Click izquierdo: &fseleccionar protección principal."
+      - "&7Click derecho: &fseparar protecciones vinculadas."
+    Slots: "30"
   Toggle-block-button:
     Display-item:
       Type: "GRASS_BLOCK"
       Amount: 1
-      Name: "&eHide protection"
+      Name: "&#FFD166Ocultar bloque"
+      Lore:
+      - "&7Oculta el bloque sin eliminar"
+      - "&7la protección."
     Show-block-item:
       Type: "GLASS"
       Amount: 1
-      Name: "&eShow protection"
-    Slots: "20"
-  Permissions-button:
+      Name: "&#FFD166Mostrar bloque"
+      Lore:
+      - "&7Vuelve a mostrar el bloque"
+      - "&7de la protección."
+    Slots: "31"
+  Rules-button:
     Display-item:
-      Type: "OAK_FENCE_GATE"
+      Type: "COMPARATOR"
       Amount: 1
-      Name: "&ePermissions"
-    Slots: "21"
-  Settings-button:
-    Display-item:
-      Type: "STONE_AXE"
-      Amount: 1
-      Name: "&eSettings"
+      Name: "&#FFD166Ajustes"
+      Lore:
+      - "&7Permisos, entorno y mensajes"
+      - "&7en una sola sección."
     Slots: "23"
-    Version: 2
   # Temporary button, upgrade on next updates
   Toggle-boundary-button:
     Display-item:
       Type: "ENDER_PEARL"
       Amount: 1
-      Name: "&eShow the protection boundaries"
+      Name: "&#FFD166Mostrar límites"
+      Lore:
+      - "&7Muestra temporalmente el área"
+      - "&7protegida."
     Hide-boundary-item:
       Type: "ENDER_EYE"
       Amount: 1
-      Name: "&eHide the protection boundaries"
+      Name: "&#FFD166Ocultar límites"
+      Lore:
+      - "&7Deja de mostrar el área"
+      - "&7protegida."
     Commands:
     - "pb view"
-    Slots: "24"
+    Slots: "32"
   Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&cClose"
+      Name: "&#FF3300✘ Cerrar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "27"
+    Slots: "49"
   Protection-info:
     Display-item:
-      Name: "&a{protection_name}"
+      Name: "&#FFD166{protection_name}"
       Lore:
-      - "&0"
-      - "&fWorld: &a{protection_world}"
-      - "&fCoords: &eX={protection_location_x} Y={protection_location_y} Z={protection_location_z}"
-      - "&fSize: &c{protectionblock_blocks_x}x{protectionblock_blocks_y}x{protectionblock_blocks_z}"
-      - "&fCreation: &b{protection_createddate}"
-      - "&fMembers: &d{protection_members_size}"
-      - "&fOwner: &3{protection_owner}"
-    Change-display-item-lore-line: " &8&o- &aLeft click (Item in hand): &eChange display item"
-    Reset-display-item-lore-line: " &8&o- &aLeft click (Empty hand): &eReset display item"
-    Slots: "31"
+      - ""
+      - "&7Mundo: &f{protection_world}"
+      - "&7Ubicación: &f{protection_location_x}, {protection_location_y}, {protection_location_z}"
+      - "&7Tamaño: &f{protectionblock_blocks_x}x{protectionblock_blocks_y}x{protectionblock_blocks_z}"
+      - "&7Creada: &f{protection_createddate}"
+      - "&7Miembros: &f{protection_members_size}"
+      - "&7Propietario: &f{protection_owner}"
+    Change-display-item-lore-line: "&7Click izquierdo con un objeto: &fcambiar icono."
+    Reset-display-item-lore-line: "&7Click izquierdo con la mano vacía: &frestablecer icono."
+    Slots: "4"
   Delete-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "RED_DYE"
       Amount: 1
-      Name: "&cDelete protection"
+      Name: "&#FF3300✘ Eliminar protección"
+      Lore:
+      - "&7Esta acción requiere confirmación."
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDQxZjRlZGJjNjhjOTA2MTM1NTI0MmJkNzNlZmZjOTI5OWEzMjUyYjlmMTFlODJiNWYxZWM3YjNiNmFjMCJ9fX0="
-    Slots: "35"
+    Slots: "53"

@@ -123,9 +123,19 @@ public class ProtectionsPermissionsManageInventory extends ChestInventoryObject 
 		}
 	}
 
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
+		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
-		goToPreviousInventory();
+		closeInventory();
 	}
 
 	private ItemStack generateItem(Item item, PermissionGroup permissionGroup) {

@@ -1,23 +1,23 @@
-Title: "Are you sure?"
+Title: "&8Confirmar acción"
 Size: 9
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
     Slots: "0-8"
   Confirm-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "LIME_STAINED_GLASS_PANE"
       Amount: 1
-      Name: "&aYes"
+      Name: "&#00FB9AConfirmar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDMxMmNhNDYzMmRlZjVmZmFmMmViMGQ5ZDdjYzdiNTVhNTBjNGUzOTIwZDkwMzcyYWFiMTQwNzgxZjVkZmJjNCJ9fX0="
     Slots: "3"
   Cancel-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "RED_STAINED_GLASS_PANE"
       Amount: 1
-      Name: "&cNo"
+      Name: "&#FF3300✘ Cancelar"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmViNTg4YjIxYTZmOThhZDFmZjRlMDg1YzU1MmRjYjA1MGVmYzljYWI0MjdmNDYwNDhmMThmYzgwMzQ3NWY3In19fQ=="
     Slots: "5"

@@ -15,10 +15,12 @@ import org.bukkit.inventory.ItemStack;
 import company.pluginName.Bukkit.Inventories.Protections.Invitations.ProtectionInvitationsInventory;
 import company.pluginName.Exceptions.RoyaleProtectionBlocksExceptionImpl;
 import company.pluginName.Modules.PlaceholdersPckg.PlaceholdersService;
+import company.pluginName.Modules.FilePckg.Settings;
 import company.pluginName.Modules.PlayerInteractionsPckg.PlayerInteractionsServiceImpl;
 import company.pluginName.Modules.PlayersDataPckg.PlayerDataService;
 import company.pluginName.Modules.ProtectionsPckg.ProtectionsServiceImpl;
 import company.pluginName.Modules.ProtectionsPckg.Objects.Protection;
+import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionDisplayNames;
 import company.pluginName.Modules.ProtectionsPckg.Utils.ProtectionUtilities;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
 import darkpanda73.PandaUtils.PandaPlugin.Annotations.PandaInject;
@@ -36,6 +38,7 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Exceptions.RoyaleProtectionBlock
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Inventories.OpenProtectionManagementInventoryRequestInput;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Inventories.OpenProtectionRemovalInventoryRequestInput;
 import royale.RoyaleProtectionBlocks.Plugin.API.Services.PlayerInteractions.Objects.Protections.ProtectionTeleportHomeRequestInput;
+import royale.RoyaleProtectionBlocks.Plugin.API.Objects.SimpleLocation;
 
 @Inventory("protections_list")
 public class ProtectionsListInventory extends PagedChestInventoryObject<Protection> {
@@ -114,16 +117,15 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 
 	@Override
 	protected ItemStack generateEntityItem(Protection protection) {
+		final boolean viewOnly = Settings.SETTINGS_NETWORK_VIEWONLY.isTrue();
 		final boolean canTeleport = protection.canTeleport(getPlayer());
-		final boolean canManage = ProtectionUtilities.canManage(protection, getPlayer());
-		final boolean canDelete = ProtectionUtilities.canDelete(protection, getPlayer());
+		final boolean canManage = !viewOnly && ProtectionUtilities.canManage(protection, getPlayer());
+		final boolean canDelete = !viewOnly && ProtectionUtilities.canDelete(protection, getPlayer());
 
-		Location homeLocation = protection.getHome();
-		Location loc = protection.getBukkitLocation();
+		Location homeLocation = viewOnly ? null : protection.getHome();
+		SimpleLocation loc = protection.getSimpleLocation();
 		Replacement[] replacements = {
-				new Replacement("{protection}",
-						() -> protection.getDisplayName() != null ? protection.getDisplayName()
-								: protection.getProtectionId()),
+				new Replacement("{protection}", () -> ProtectionDisplayNames.forGui(protection)),
 				new Replacement("{protection_owner}",
 						() -> protection.getOwnerName() != null ? protection.getOwnerName() : "???"),
 				new Replacement("{world}", () -> protection.getWorldName()),
@@ -140,8 +142,9 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 		List<String> lore = new ArrayList<>(getChestInventoryData().getEntityLore());
 		lore.add("&0");
 
-		if ((homeLocation != null && canTeleport) || protection.isMainOwner(getPlayer().getUniqueId())) {
-			lore.add(homeLocation != null
+		if ((viewOnly && canTeleport) || (homeLocation != null && canTeleport)
+				|| (!viewOnly && protection.isMainOwner(getPlayer().getUniqueId()))) {
+			lore.add(viewOnly || homeLocation != null
 					? getChestInventoryData().getCustomFields().get(ENTITY_TELEPORTLORELINE_PATH).toString()
 					: getChestInventoryData().getCustomFields().get(ENTITY_TELEPORTNOTSETLORELINE_PATH).toString());
 		}
@@ -159,10 +162,11 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 
 	@Override
 	protected void onEntityClick(InventoryClickEvent e, Protection protection) {
-		Location homeLocation = protection.getHome();
+		boolean viewOnly = Settings.SETTINGS_NETWORK_VIEWONLY.isTrue();
+		Location homeLocation = viewOnly ? null : protection.getHome();
 
 		if (e.getClick() == ClickType.LEFT) {
-			if (homeLocation != null && protection.canTeleport(getPlayer())) {
+			if ((viewOnly || homeLocation != null) && protection.canTeleport(getPlayer())) {
 				try {
 					playerInteractionsService.protectionTeleportHomeRequest(
 							ProtectionTeleportHomeRequestInput.inst(getPlayer(), protection));
@@ -170,7 +174,7 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 					e1.sendError(getPlayer());
 				}
 			}
-		} else if (e.getClick() == ClickType.RIGHT) {
+		} else if (!viewOnly && e.getClick() == ClickType.RIGHT) {
 			try {
 				playerInteractionsService.openProtectionManagementInventoryRequest(
 						OpenProtectionManagementInventoryRequestInput.inst(getPlayer(), protection));
@@ -179,7 +183,7 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 					ex.sendError(getPlayer());
 				}
 			}
-		} else if (e.getClick() == ClickType.SHIFT_RIGHT) {
+		} else if (!viewOnly && e.getClick() == ClickType.SHIFT_RIGHT) {
 			try {
 				playerInteractionsService.openProtectionRemovalInventoryRequest(
 						OpenProtectionRemovalInventoryRequestInput.inst(getPlayer(), protection));
@@ -192,6 +196,11 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 	@ItemGenerator("All-filter-button")
 	private ItemStack generateAllFilterItem(Item item) {
 		return this.currentFilter == Filter.ALL ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
+	@ItemGenerator("Invitations-button")
+	private ItemStack generateInvitationsItem(Item item) {
+		return Settings.SETTINGS_NETWORK_VIEWONLY.isTrue() ? null : item.getItems().get(Item.DISPLAYITEM_KEY);
 	}
 
 	@ItemGenerator("Own-filter-button")
@@ -240,6 +249,11 @@ public class ProtectionsListInventory extends PagedChestInventoryObject<Protecti
 	@ItemExecutor("Invitations-button")
 	private void onClickInvitationsButton() {
 		new ProtectionInvitationsInventory(getPlayer(), playerDataService.getPlayerData(getPlayer())).openInventory();
+	}
+
+	@ItemExecutor("Close-button")
+	private void onClickCloseButton() {
+		closeInventory();
 	}
 
 }

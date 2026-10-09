@@ -1,76 +1,105 @@
-Title: "{protection} > Members"
-Size: 27
+Title: "Miembros ({current_page}/{max_page})"
+Size: 54
 Entity:
-  Name: "&e{player}"
-  Left-click-lore-line: " &8- &aLeft click: &e{left_click_action}"
-  Right-click-lore-line: " &8- &aRight click: &e{right_click_action}"
-  Promote-action-lore-line: "Promote member"
-  Demote-action-lore-line: "Demote member"
-  Remove-action-lore-line: "Remove member"
-  Slots: "0-17"
+  Name: "&#FFD166{player}"
+  Left-click-lore-line: "&7Click izquierdo: &f{left_click_action}"
+  Right-click-lore-line: "&7Click derecho: &f{right_click_action}"
+  Promote-action-lore-line: "Ascender miembro"
+  Demote-action-lore-line: "Degradar miembro"
+  Remove-action-lore-line: "Expulsar miembro"
+  Slots: "9-44"
 Items: 
   Background: 
     Display-item: 
-      Type: "GRAY_STAINED_GLASS_PANE"
+      Type: "BLACK_STAINED_GLASS_PANE"
       Amount: 1
       Name: "&0"
-    Slots: "18-26"
-  Close-button:
+    Slots: "0-3;5-8;45-48;50-51"
+  Protection-info:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Name: "&#FFD166{protection}"
+      Lore:
+      - ""
+      - "&7Protección que estás editando."
+    Slots: "4"
+  Back-button:
+    Display-item:
+      Type: "SPECTRAL_ARROW"
       Amount: 1
-      Name: "&cClose"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0="
-    Slots: "18"
+      Name: "&#FFD166← Volver"
+    Slots: "45"
   Previous-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&ePrevious"
+      Name: "&#FFD166← Página anterior"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzYjJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ=="
-    Slots: "21"
+    Slots: "48"
   Next-page-button: 
     Display-item: 
-      Type: "PLAYER_HEAD"
+      Type: "ARROW"
       Amount: 1
-      Name: "&eNext"
+      Name: "&#FFD166Página siguiente →"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliZjMyOTJlMTI2YTEwNWI1NGViYTcxM2FhMWIxNTJkNTQxYTFkODkzODgyOWM1NjM2NGQxNzhlZDIyYmYifX19"
-    Slots: "23"
+    Slots: "50"
   All-filter-button:
     Display-item:
-      Type: "BARRIER"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eAll"
-    Slots: "26"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&#00FB9A⏺ &aTodos"
+      - "&8⏺ &7Miembros"
+      - "&8⏺ &7Propietarios"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
     Version: 2
   Members-filter-button:
     Display-item:
-      Type: "CHEST"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eMembers"
-    Slots: "26"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todos"
+      - "&#00FB9A⏺ &aMiembros"
+      - "&8⏺ &7Propietarios"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
     Version: 2
   Owners-filter-button:
     Display-item:
-      Type: "ENDER_CHEST"
+      Type: "HOPPER"
       Amount: 1
-      Name: "&aCurrent filter: &eOwners"
-    Slots: "26"
+      Name: "&#FFD166⇄ Filtros"
+      Lore:
+      - ""
+      - "&fSeleccionado actualmente:"
+      - "&8⏺ &7Todos"
+      - "&8⏺ &7Miembros"
+      - "&#00FB9A⏺ &aPropietarios"
+      - ""
+      - "&#FFD166→ Click para cambiar filtro"
+    Slots: "52"
     Version: 2
   Search-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "OAK_SIGN"
       Amount: 1
-      Name: "&eSearch for a new member"
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmMzNWU4Njg0YzdmNzc2YmVmZWRjNDMxOWQwODE0OGM1NGJlYTM5MzIxZTFiZDVkZWY3YTU1Yjg5ZmRhYTA5OSJ9fX0="
-    Slots: "22"
-  Alternate-options-button:
+      Name: "&#00FB9A✎ Buscar jugador"
+      Lore:
+      - "&7Busca un jugador para invitarlo."
+      - ""
+      - "&7Búsqueda actual: &f{search}"
+    Slots: "53"
+  Close-button:
     Display-item:
-      Type: "PLAYER_HEAD"
+      Type: "BARRIER"
       Amount: 1
-      Name: "&eAlternate options"
-      Lore: 
-      - "&7&oUse this option if you can't"
-      - "&7&ouse certain options."
-      Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjA1MWRlNjdiM2RhZDYyMzc0NmNlZDU3MzNlOGJmY2UyYmZjMTRmNTU2OGE1MDc0MjY2YjJkZDQyNzQ1ZmI3YSJ9fX0="
-    Slots: "20"
+      Name: "&#FF3300✘ Cerrar"
+    Slots: "49"

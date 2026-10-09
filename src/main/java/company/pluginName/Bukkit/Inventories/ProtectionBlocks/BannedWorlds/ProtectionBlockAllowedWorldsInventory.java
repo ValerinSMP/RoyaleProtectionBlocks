@@ -14,6 +14,8 @@ import darkpanda73.PandaUtils.PandaColors.Messages.Objects.Replacement;
 import darkpanda73.PandaUtils.PandaUtilities.ItemStack.ItemBuilder;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.Inventory;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemExecutor;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Annotations.ItemGenerator;
+import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Item;
 import darkpanda73.PandaUtils.Services.PandaInventoriesModule.v1.Objects.ChestInventory.Paged.PagedChestInventoryObject;
 
 @Inventory("protectionblocks_allowedworlds")
@@ -50,9 +52,19 @@ public class ProtectionBlockAllowedWorldsInventory extends PagedChestInventoryOb
 		}).openInventory();
 	}
 
+	@ItemExecutor("Back-button")
+	private void executeBackButton() {
+		goToPreviousInventory();
+	}
+
+	@ItemGenerator("Back-button")
+	private ItemStack generateBackButton(Item item) {
+		return getPreviousInventory() != null ? item.getItems().get(Item.DISPLAYITEM_KEY) : null;
+	}
+
 	@ItemExecutor("Close-button")
 	private void executeCloseButton() {
-		goToPreviousInventory();
+		closeInventory();
 	}
 
 	@ItemExecutor("Search-button")
