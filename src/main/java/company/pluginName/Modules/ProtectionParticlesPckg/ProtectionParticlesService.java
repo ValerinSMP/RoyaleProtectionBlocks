@@ -11,6 +11,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import company.pluginName.MainPluginClass;
 import org.bukkit.scheduler.BukkitTask;
 
 import company.pluginName.API.RoyaleProtectionBlocksAPIImpl;
@@ -32,11 +39,13 @@ import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaDoub
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaIntegerField;
 import darkpanda73.PandaUtils.Services.PandaFilesModule.Objects.Fields.PandaStringField;
 import darkpanda73.PandaUtils.Utilities.Java.Objects.Pair;
-import lombok.Getter;
 import royale.RoyaleProtectionBlocks.Plugin.API.Objects.SimpleLocation;
 
 @PandaService
-public class ProtectionParticlesService {
+public class ProtectionParticlesService implements Listener {
+
+	@PandaInject
+	private MainPluginClass plugin;
 
 	private static final Color GREEN_COLOR = Color.fromRGB(50, 255, 55);
 	private static final Color GRAY_COLOR = Color.fromRGB(180, 180, 180);
@@ -71,10 +80,11 @@ public class ProtectionParticlesService {
 
 	@LoadMethod
 	private void load() {
+		Bukkit.getPluginManager().registerEvents(this, plugin);
 		checkerTask = TasksUtils.executeWithTimer(() -> {
 			containers.entrySet().stream().filter(entry -> {
 				if ((entry.getValue().getTaskStart()
-						+ (SETTINGS_PROTECTION_VIEW_DURATIONINMILLIS.getContent() * 1000)) < System
+						+ (SETTINGS_PROTECTION_VIEW_DURATIONINMILLIS.getContent() * 1000L)) < System
 								.currentTimeMillis()) {
 					entry.getValue().stop();
 					return true;
@@ -86,13 +96,26 @@ public class ProtectionParticlesService {
 
 	@UnloadMethod
 	private void unload() {
+		HandlerList.unregisterAll(this);
 		if (checkerTask != null) {
 			checkerTask.cancel();
 			checkerTask = null;
-			containers.entrySet().removeIf(entry -> {
-				entry.getValue().stop();
-				return true;
-			});
+		}
+		containers.values().forEach(ProtectionParticlePlayerContainer::stop);
+		containers.clear();
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		deactivateView(event.getPlayer().getUniqueId());
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerChangedWorld(PlayerChangedWorldEvent event) {
+		ProtectionParticlePlayerContainer container = containers.get(event.getPlayer().getUniqueId());
+		if (container != null) {
+			container.currentTick = 0;
+			container.updateLocation(event.getPlayer(), event.getPlayer().getLocation().getBlock().getLocation());
 		}
 	}
 
@@ -134,6 +157,7 @@ public class ProtectionParticlesService {
 
 		private ProtectionParticlesService service;
 		private UUID playerUuid;
+		private final Player playerSession;
 		private boolean showAll;
 
 		private long radius = SETTINGS_PROTECTION_VIEW_RADIUS.getContent();
@@ -151,29 +175,39 @@ public class ProtectionParticlesService {
 
 		private Message actionBarMessage;
 
-		private @Getter long taskStart = System.currentTimeMillis();
-		private @Getter BukkitTask task;
+		private long taskStart = System.currentTimeMillis();
+		private BukkitTask task;
+
+		public long getTaskStart() { return taskStart; }
 
 		public ProtectionParticlePlayerContainer(ProtectionParticlesService service, Player player, boolean showAll) {
 			this.service = service;
 			this.playerUuid = player.getUniqueId();
+			this.playerSession = player;
 			this.showAll = showAll;
 			this.currentTick = 0;
 			this.actionBarMessage = MessageTemplate.inst(MESSAGE_PROTECTION_VIEW_VIEWACTIVEACTIONBAR.getContent())
 					.process();
 
 			updateLocation(player, player.getLocation().getBlock().getLocation());
-			actionBarMessage.sendActionBar(player);
 		}
 
 		public void start() {
 			this.taskStart = System.currentTimeMillis();
-			this.task = TasksUtils.executeOnAsyncWithTimer(() -> processTick(), 1, 1);
+			if (this.task != null) { return; }
+			this.task = TasksUtils.executeWithTimer(() -> processTick(), 1, 1);
+			if (this.task != null) {
+				// Keep the existing configurable text, but announce only the transition.
+				actionBarMessage.sendMessage(playerSession);
+			} else {
+				service.deactivateView(playerUuid);
+			}
 		}
 
 		public void stop() {
 			if (this.task != null) {
 				this.task.cancel();
+				this.task = null;
 			}
 
 		}
@@ -181,9 +215,16 @@ public class ProtectionParticlesService {
 		private void processTick() {
 			Player pl = Bukkit.getPlayer(playerUuid);
 
-			if (pl == null || !pl.isOnline()) {
+			if (service.containers.get(playerUuid) != this) { return; }
+
+			if (pl != playerSession || !pl.isOnline()) {
 				service.deactivateView(playerUuid);
 				return;
+			}
+
+			if (!pl.getWorld().equals(currentLocation.getWorld())) {
+				currentTick = 0;
+				updateLocation(pl, pl.getLocation().getBlock().getLocation());
 			}
 
 			currentTick++;
@@ -324,7 +365,6 @@ public class ProtectionParticlesService {
 				updateLocation(pl, pl.getLocation().getBlock().getLocation());
 			}
 
-			actionBarMessage.sendActionBar(pl);
 		}
 
 		private void updateLocation(Player player, Location location) {
