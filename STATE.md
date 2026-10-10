@@ -9,3 +9,4 @@
 - Entrega: Custom SHA-256 `8620d74631bd081c65785fbab50d748cca9c72963b93b4503d1c3ef7f22b1313`; Sync `e780716bf18ad20d6a4bf9cbf34becc411ffc6d349198d16d5c11581deaed47e`.
 - Instalado: no. Activo: no. Gameplay: no verificado. No se usó Test ni se modificaron configuraciones/datos productivos.
 - Siguiente paso: validación acotada en Test de partículas reales, registro de listeners y coste con vistas concurrentes. Producción no autorizada en esta tarea.
+- Git: código/pruebas en commit local `6ca7a55` de personal. Push HTTPS a `github valerin` pendiente por falta de autenticación; no se copiaron credenciales.
