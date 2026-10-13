@@ -117,7 +117,7 @@ https://jd.papermc.io/paper/26.2/org/bukkit/entity/Player.html.
 ## Activación productiva autorizada
 
 2026-10-13: Custom recargado a las 12:44:28 y Sync a las 12:44:43 mediante
-, tras aprobación explícita. Ambos confirmaron recarga y
+`pb admin reload`, tras aprobación explícita. Ambos confirmaron recarga y
 respuesta en español, sin errores críticos. Traducciones y controles conservados
 tras la recarga. JAR productivos sin cambios; código adicional sigue solo en Test.
 Gameplay con clientes pendiente. Evidencia HomeSV: production-reload.json.
