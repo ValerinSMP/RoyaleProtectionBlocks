@@ -54,7 +54,7 @@ Items:
       - "&8⏺ &7Miembros"
       - "&8⏺ &7Propietarios"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
     Version: 2
   Members-filter-button:
@@ -69,7 +69,7 @@ Items:
       - "&#00FB9A⏺ &aMiembros"
       - "&8⏺ &7Propietarios"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
     Version: 2
   Owners-filter-button:
@@ -84,7 +84,7 @@ Items:
       - "&8⏺ &7Miembros"
       - "&#00FB9A⏺ &aPropietarios"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
     Version: 2
   Search-button:

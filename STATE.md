@@ -1,12 +1,12 @@
 # Estado RoyaleProtectionBlocks
 
-- Fuente de esta entrega: personal `/root/development/projects/survival-custom/RoyaleProtectionBlocks`, rama `valerin`, base `836ad59`; copia HomeSV preservada sin editar.
-- Tarea: corregir spam de `/pb view` en Leaf 26.2 y auditar `/pb merge` sin modificarlo.
-- Modificado: `ProtectionParticlesService.java`; añadido test del servicio y scripts `build-view-fix.sh`/`verify-view-artifact.py`. Informe técnico en `docs/VIEW-FIX-20261010.md`.
-- Preservar: `DEVELOPMENT_HANDOFF.md` preexistente y todas las modificaciones históricas del fork; no incluir datos ni bases JAR en Git.
-- Compilado: parche focal de dos clases sobre las bases exactas de Custom/Sync, JDK 25/release 21; no build completo Maven.
-- Pruebas: 17 comprobaciones por base pasadas; archivo ZIP conserva 2.036/2.033 entradas ajenas idénticas. Primeros dos intentos del simulador fallaron y fueron corregidos. Una ejecución fue rechazada por bloqueo de otra build; no se evadió.
-- Entrega: Custom SHA-256 `8620d74631bd081c65785fbab50d748cca9c72963b93b4503d1c3ef7f22b1313`; Sync `e780716bf18ad20d6a4bf9cbf34becc411ffc6d349198d16d5c11581deaed47e`.
-- Instalado: no. Activo: no. Gameplay: no verificado. No se usó Test ni se modificaron configuraciones/datos productivos.
-- Siguiente paso: validación acotada en Test de partículas reales, registro de listeners y coste con vistas concurrentes. Producción no autorizada en esta tarea.
-- Git: código/pruebas en commit local `6ca7a55` de personal. Push HTTPS a `github valerin` pendiente por falta de autenticación; no se copiaron credenciales.
+- Fuente: personal `/root/development/projects/survival-custom/RoyaleProtectionBlocks`, rama valerin, con su submódulo utils. HomeSV conserva fuente histórica sin editar.
+- Tarea: mensajes/ayuda en español y pulido de presentación conservando menús funcionales.
+- Cambios: defaults YAML, ReadOnlyFeedback y referencia diagnóstica en checkIfWritable; selección de canal para 26.x y contador de una página en utils; README, scripts y regresiones. Preservar DEVELOPMENT_HANDOFF.md y build/ no versionados.
+- Build focal: JDK 25/release 21, bases exactas por nodo, ejecutor limitado. No build Maven completo: fuente/API del servicio contienen divergencias previas de red/teletransporte no instaladas; candidato conserva 54 métodos ajenos idénticos.
+- Pruebas: 124 comprobaciones sobre los dos candidatos; claves/tipos/placeholders/control de YAML preservados; ZIP conserva 2.035/2.032 entradas. Primer intento de compilación completa rechazó divergencias previas; el adaptador focal resuelve solo el diagnóstico, sin incorporar otros cambios.
+- Configuración instalada: 24 archivos únicos en Custom/Sync/Test; respaldo verificado en `/mnt/storage/backups/ai/survival-custom/royale-texts-20261013/`. Config.yml/reglas de juego no modificados. Producción pendiente de recarga autorizada.
+- JAR instalado/activo: solo Test f2ea450e-02a0-416c-9838-e73458d37b1c, SHA-256 c0338a2c765a09210db66c0633c1a62ba22307dbc1180ffed8604bbaabb7c6f3. Test reiniciado con cero jugadores, llegó a Done, registró ReadOnly, recargó y mostró ayuda en español.
+- Producción: JAR sin cambios; candidato Sync SHA-256 27007bb5a0dbc75b4585c2277f20f3a640a3d59a7aeb068e3e0ee319c55fd9c8, no instalado.
+- Gameplay/aspecto con clientes: pendiente. Merge sigue igual, incluido el problema preexistente de dos argumentos; no se hicieron pruebas económicas/destructivas.
+- Evidencia: docs/PRESENTACION-20261013.md; staging HomeSV `royale-texts-20261013/`. Próximo paso: validación visual en Test; recarga productiva exige aprobación explícita. No instalar candidatos productivos por inferencia.

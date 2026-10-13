@@ -53,7 +53,7 @@ Items:
       - "&8⏺ &7Propias"
       - "&8⏺ &7Compartidas"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmFmYTMxOGFjMDhmNjdhNWJjMjQ0M2QwM2VhZjI0ZWQyMjBkNDNiODMzYjNhZDU3YzNhNDk5Njk4ZmU3ZjUzZCJ9fX0="
     Slots: "52"
     Version: 3
@@ -69,7 +69,7 @@ Items:
       - "&#00FB9A⏺ &aPropias"
       - "&8⏺ &7Compartidas"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGRjYzE4OTYzM2M3ODljYjZkNWU3OGQxM2E1MDQzYjI2ZTdiNDBjZGI3Y2ZjNGUyM2FhMjI3OTU3NDk2N2I0In19fQ=="
     Slots: "52"
     Version: 3
@@ -85,7 +85,7 @@ Items:
       - "&8⏺ &7Propias"
       - "&#00FB9A⏺ &aCompartidas"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
       Skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjk4YmM2M2YwNWY2Mzc4YmYyOWVmMTBlM2Q4MmFjYjNjZWI3M2E3MjBiZjgwZjMwYmM1NzZkMGFkOGM0MGNmYiJ9fX0="
     Slots: "52"
     Version: 3
@@ -101,7 +101,7 @@ Items:
       - "&8⏺ &7Nombre"
       - "&8⏺ &7Mundo"
       - ""
-      - "&#FFD166→ Click para cambiar orden"
+      - "&#FFD166→ Haz clic para cambiar orden"
     Slots: "53"
     Version: 3
   Name-sort-button:
@@ -116,7 +116,7 @@ Items:
       - "&#00FB9A⏺ &aNombre"
       - "&8⏺ &7Mundo"
       - ""
-      - "&#FFD166→ Click para cambiar orden"
+      - "&#FFD166→ Haz clic para cambiar orden"
     Slots: "53"
     Version: 3
   World-sort-button:
@@ -131,7 +131,7 @@ Items:
       - "&8⏺ &7Nombre"
       - "&#00FB9A⏺ &aMundo"
       - ""
-      - "&#FFD166→ Click para cambiar orden"
+      - "&#FFD166→ Haz clic para cambiar orden"
     Slots: "53"
     Version: 3
   Invitations-button:

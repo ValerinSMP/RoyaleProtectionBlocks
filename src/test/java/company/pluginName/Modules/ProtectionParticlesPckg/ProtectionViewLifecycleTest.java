@@ -14,6 +14,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.*;
 import darkpanda73.PandaUtils.PandaColors.Messages.Objects.MessageTemplate;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 import company.pluginName.MainPluginClass;
 import company.pluginName.API.RoyaleProtectionBlocksAPIImpl;
 import company.pluginName.Modules.ProtectionsPckg.ProtectionsServiceImpl;
@@ -24,7 +26,7 @@ import darkpanda73.PandaUtils.PandaPlugin.Utils.TasksUtils;
 public final class ProtectionViewLifecycleTest {
     static final List<Task> tasks = new ArrayList<>();
     static final Map<UUID, Player> online = new HashMap<>();
-    static int checks, notices, searches, registrations;
+    static int checks, notices, searches, registrations, bars;
     static class Task implements BukkitTask {
         final Runnable runnable; final int id = tasks.size()+1; boolean cancelled;
         Task(Runnable runnable) { this.runnable=runnable; tasks.add(this); }
@@ -46,6 +48,15 @@ public final class ProtectionViewLifecycleTest {
                 case "getLocation" -> new Location(this.world, 10,64,10);
                 case "isOnline" -> connected;
                 case "sendMessage" -> {notices++;yield null;}
+                case "sendActionBar" -> {bars++;yield null;}
+                case "spigot" -> new Player.Spigot() {
+                    @Override public void sendMessage(ChatMessageType type, BaseComponent component) {
+                        if (type == ChatMessageType.ACTION_BAR) { bars++; } else { notices++; }
+                    }
+                    @Override public void sendMessage(ChatMessageType type, BaseComponent... components) {
+                        if (type == ChatMessageType.ACTION_BAR) { bars++; } else { notices++; }
+                    }
+                };
                 default -> fallback(p,m,a);
             });
             online.put(id,player);
@@ -115,9 +126,9 @@ public final class ProtectionViewLifecycleTest {
         require(live()==1&&registrations==1,"one expiry checker and listener registration");
         World first=world("first"),second=world("second");
         Session session=new Session(UUID.randomUUID(),first);
-        require(MessageTemplate.getMessageBuilder().getClass().getName().contains("NMS.Default"),"26.2 selects legacy chat fallback");
+        require(MessageTemplate.getMessageBuilder().getClass().getName().contains("NMS.Modern"),"26.2 selects correct channel builder");
         MessageTemplate.inst("Activation probe").process().sendActionBar(session.player);
-        require(notices==1,"original action bar path is delivered to chat on 26.2");
+        require(notices==0 && bars==1,"26.2 action bar is not delivered to chat");
         notices=0;
         service.toggleView(session.player,false); Task original=latest();
         require(service.isActive(session.player)&&live()==2&&notices==1,"activation once");

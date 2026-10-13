@@ -101,6 +101,7 @@ import royale.RoyaleProtectionBlocks.Plugin.API.Services.Protections.Objects.Pro
 @PandaService(priority = 1001)
 public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
+
 	@RegisteredPandaField("lang")
 	private static final PandaStringField MESSAGE_TELEPORT_UNSAFEWARNINGTITLE = new PandaStringField(
 			"Message.Teleport.Unsafe-warning-title", "&cUbicación insegura");
@@ -1155,7 +1156,7 @@ public class PlayerInteractionsServiceImpl extends PlayerInteractionsService {
 
 	private void checkIfWritable() throws RoyaleProtectionBlocksExceptionImpl {
 		if (Settings.SETTINGS_NETWORK_VIEWONLY.isTrue()) {
-			throw Exceptions.Protections.PERMISSIONDENIED.generateException();
+			throw ReadOnlyFeedback.READ_ONLY.generateException();
 		}
 	}
 

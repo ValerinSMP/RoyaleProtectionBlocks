@@ -26,15 +26,23 @@ Version: 3
 
 Prefix: "&8[&#FF3300ᴘʀᴏᴛᴇᴄᴄɪᴏɴᴇꜱ&8] &7"
 
-Message: 
-  
+Message:
+
   Reload: "&aEl plugin se recargó correctamente."
   Set-spawn-successfully: "&aEl punto de aparición fue actualizado."
-  
-  General: 
+
+  General:
     No-limit: "Sin límite"
-  
-  Protections: 
+
+    Empty: "&7(Vacío)"
+    Click: "&8[&7clic&8]"
+    Guarded: "&7(Protegido)"
+    Yes: "&aSí"
+    No: "&cNo"
+    True: "&aSí"
+    False: "&cNo"
+    Null: "&7&o"
+  Protections:
     Created-successfully: "&aLa protección fue creada correctamente."
     Removed-successfully: "&aLa protección fue eliminada correctamente."
     Home-set-successfully: "&aEl punto de inicio de la protección fue establecido."
@@ -48,56 +56,76 @@ Message:
     Player-with-kick-bypass: "&cNo puedes expulsar a ese jugador por sus permisos."
     Player-kicked: "&aEl jugador fue expulsado de la protección."
     Left-successfully: "&aSaliste de la protección correctamente."
-    
-    Flags: 
+
+    Flags:
       Flag-name: "&e{flag} &8[&7{value}&8]"
       Allow-value-name: "&aPermitir"
       Deny-value-name: "&cDenegar"
       String-value-name: "&b{text}"
       Not-defined-name: "&7Sin definir"
       Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
-    
-    Members: 
+
+    Members:
       Added-successfully: "&aEl jugador fue añadido como miembro."
       Removed-successfully: "&aEl miembro fue expulsado de la protección."
-    
-    Owners: 
+
+    Owners:
       Added-successfully: "&aEl jugador fue añadido como propietario."
       Removed-successfully: "&aEl propietario fue retirado de la protección."
-    
-    Banneds: 
+
+    Banneds:
       Added-successfully: "&aEl jugador fue bloqueado de la protección."
       Removed-successfully: "&aEl jugador fue desbloqueado de la protección."
-    
-    Blocks: 
+
+    Blocks:
       Created-successfully: "&aEl tipo de bloque de protección fue creado."
       Saved-successfully: "&aLos cambios del bloque de protección fueron guardados."
       Removed-successfully: "&aEl tipo de bloque de protección fue eliminado."
       Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
 
     Invitations:
-      Member-accepted: "&aEl jugador &e{player_name} &aaceptó la invitación a tu protección &e{protection_name}&a."
+      Member-accepted: "&aEl jugador &e{player_name} &aaceptó la invitación a tu protección
+        &e{protection_name}&a."
       Accepted-successfully: "&aAceptaste la invitación correctamente."
       Rejected-successfully: "&aRechazaste la invitación correctamente."
       All-rejected-successfully: "&aRechazaste todas las invitaciones correctamente."
-      Invitation-received: "&eRecibiste una invitación a una protección. Usa &a{command} &epara responder."
+      Invitation-received: "&eRecibiste una invitación a una protección. Usa &a{command} &epara
+        responder."
       Invited-successfully: "&aEl jugador recibió la invitación correctamente."
 
     Permissions:
       Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
 
+      Switched-successfully: "&aPermiso &e{permission_name}&a de &e{group_name}&a: &e{value}&a."
     Settings:
       Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
 
+      Switched-successfully: "&aAjuste &e{setting_name}&a de &e{group_name}&a: &e{value}&a."
     Display-item-changed-successfully: "&aEl icono de la protección fue actualizado."
-  
-  Transfer: 
+
+    Flight:
+      Enabled: "&aVuelo activado."
+      Disabled: "&7Vuelo desactivado."
+    Transfer:
+      Transfered-successfully: "&aProtección transferida al nuevo propietario."
+    Purchase:
+      Price-set-successfully: "&aProtección puesta en venta por &e{price}$&a."
+      Price-unset-successfully: "&aLa protección ya no está en venta."
+      Purchased-successfully: "&aProtección comprada."
+    Public-access:
+      Set-to-public-successfully: "&aTu protección ahora es visible y accesible para todos."
+      Set-to-private-successfully: "&aTu protección ahora solo aparece para sus miembros en los menús."
+  Transfer:
     Available-list: "&7Plugins de protección disponibles para migrar: &f{list}"
-    Protection-stones-not-loaded: "&cProtectionStones no está cargado. Debes cargarlo para migrar sus datos."
-    Warning: "&7Vas a migrar todos los datos desde otro plugin. No detengas el servidor durante el proceso y conserva una copia de seguridad de WorldGuard y del plugin anterior. Escribe &e{command} &7para confirmar."
+    Protection-stones-not-loaded: "&cProtectionStones no está cargado. Debes cargarlo para migrar sus
+      datos."
+    Warning: "&7Vas a migrar todos los datos desde otro plugin. No detengas el
+      servidor durante el proceso y conserva una copia de seguridad de
+      WorldGuard y del plugin anterior. Escribe &e{command} &7para confirmar."
     Start: "&7Iniciando migración..."
-    End: "&7Migración finalizada. Revisa los resultados antes de retirar el plugin anterior."
-    Result: 
+    End: "&7Migración finalizada. Revisa los resultados antes de retirar el
+      plugin anterior."
+    Result:
     - ""
     - "&eResultado de la migración: "
     - ""
@@ -110,40 +138,44 @@ Message:
     - "&e  - &aTiempo requerido: {required_time} ms"
     - "&e  - &cErrores en consola: {errors_in_console}"
     - ""
-  
-  Purge: 
-    Warning: "&7Vas a eliminar &e{amount} &7protecciones según la última conexión de sus propietarios. Conserva una copia de seguridad y escribe &e{command} &7para confirmar."
+
+    Protection-blocks-progress: "&7Bloques de protección importados: &e{current_percent}"
+    Protections-progress: "&7Protecciones importadas: &e{current_percent}"
+  Purge:
+    Warning: "&7Vas a eliminar &e{amount} &7protecciones según la última conexión
+      de sus propietarios. Conserva una copia de seguridad y escribe &e{command}
+      &7para confirmar."
     Search: "&7Buscando protecciones coincidentes..."
     Start: "&7Iniciando limpieza..."
     End: "&aLimpieza terminada. Se eliminaron &e{amount} &aprotecciones."
     Error: "&7No se pudieron eliminar &e{amount} &7protecciones. Revisa la consola."
     Export-end: "&aSe exportaron &e{amount} &aprotecciones al archivo &e{file}&a."
-  
-  Files: 
+
+  Files:
     Exported-successfully: "Todos los datos fueron exportados correctamente."
     Imported-successfully: "Todos los datos fueron importados correctamente."
-  
-  Helper: 
+
+    Imported-warning: "&cNo se pudieron guardar los siguientes bloques. Revisa la consola:"
+  Helper:
     Available-left-arrow: "&e«"
     Unavailable-left-arrow: "&r«"
     Available-right-arrow: "&e»"
     Unavailable-right-arrow: "&r»"
-    Header: 
+    Header:
     - " "
     - "&c・。・。・。・。・。・。・。%left_arrow%&r %current_page%/%max_page% %right_arrow%&c。・。・。・。・。・。・。・"
     - " "
-    Body: 
+    Body:
     - "&6%command_usage%"
     - "  &8%command_description%"
-    Footer: 
+    Footer:
     - " "
     - "&c・。・。・。・。・。・。・。・。・。・。・。・。・。・。・。・。・"
     - " "
-    Error: 
+    Error:
       Not-a-number: "&cDebes indicar un número válido."
 
   Teleport:
-    Transferring: "&7Enviándote al servidor de tu protección..."
     Unsafe-warning-title: "&cUbicación insegura"
     Unsafe-warning-description:
     - "&7El destino no parece tener una plataforma segura"
@@ -151,8 +183,98 @@ Message:
     - "&7Podrías recibir daño al llegar."
     - "&7¿Quieres teletransportarte de todos modos?"
 
-Error: 
-  
+    Stay-on-site: "&7Quédate quieto durante &e%seconds% segundos &7para teletransportarte."
+  Update-checker:
+    Outdated-version: "&7Hay una actualización del plugin. &8(Actual: &f%current_version%&8; nueva: &f%new_version%&8)"
+  Protection:
+    Info:
+      General-information:
+      - ""
+      - "&a&lInformación de la protección"
+      - "&f&l|&r ID: &a{protection_id}"
+      - "&f&l|&r Nombre: &a{protection_name}"
+      - "&f&l|&r Tamaño: &a{protection_size_x}x{protection_size_y}x{protection_size_z}"
+      - "&f&l|&r Propietario principal: &a{protection_owner}"
+      - "&f&l|&r Miembros: &a{protection_members}"
+      - "&f&l|&r Propietarios: &a{protection_owners}"
+      - "&f&l|&r Bloqueados: &a{protection_banneds}"
+      - "&f&l|&r Vence en: &e{protection_expires_in}"
+      - "&f&l|&r Tiene protección temporal: &e{protection_is_guarded}"
+      Members-information:
+      - ""
+      - "&a&lMiembros"
+      - "{protection_members}"
+      - ""
+      - "{previous_page} {current_page} {next_page}"
+      Members-information-previous-available: "&e[anterior]"
+      Members-information-previous-unavailable: "&8[anterior]"
+      Members-information-next-available: "&e[siguiente]"
+      Members-information-next-unavailable: "&8[siguiente]"
+      Owners-information:
+      - ""
+      - "&a&lPropietarios"
+      - "{protection_owners}"
+      - ""
+      - "{previous_page} {current_page} {next_page}"
+      Owners-information-previous-available: "&e[anterior]"
+      Owners-information-previous-unavailable: "&8[anterior]"
+      Owners-information-next-available: "&e[siguiente]"
+      Owners-information-next-unavailable: "&8[siguiente]"
+      Banneds-information:
+      - ""
+      - "&a&lBloqueados"
+      - "{protection_banneds}"
+      - ""
+      - "{previous_page} {current_page} {next_page}"
+      Banneds-information-previous-available: "&e[anterior]"
+      Banneds-information-previous-unavailable: "&8[anterior]"
+      Banneds-information-next-available: "&e[siguiente]"
+      Banneds-information-next-unavailable: "&8[siguiente]"
+    Permissions:
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
+    Settings:
+      Charged-successfully: "&aSe descontaron &e${amount} &ade tu saldo."
+    Merge:
+      Parent-set-successfully: "&aProtección fusionada."
+      Parent-removed-successfully: "&aProtección separada."
+      Protection-creation-advice: "&7Esta protección se superpone con otra. Usa &e/pb merge &7para revisar las opciones de fusión."
+    Unblocked-successfully: "&aProtección desbloqueada."
+    Blocked-successfully: "&aProtección bloqueada."
+    Flags:
+      Charged-successfully: "&aSe descontaron &e{amount}$ &ade tu saldo."
+    Blocks:
+      Charged-successfully: "&aSe descontaron &e{amount}$ &ade tu saldo."
+    Flight:
+      Remove-in-countdown: "&cNo puedes volar en esta zona. El vuelo se desactivará en &e{seconds}&c."
+      Remove-in-done: "&cVuelo desactivado: no está permitido en esta zona."
+    View:
+      View-active-action-bar: "&aVisualización de límites activada."
+    Exceeding-limit-warning: "&cSuperas tu límite de protecciones. Retira algunas para ajustarte al límite. &8(Actuales: &f%current%&8; límite: &f%max%&8)"
+    Exceeding-limit-block-specific-warning: "&cSuperas tu límite de protecciones con &f%block%&c. Retira algunas para ajustarte al límite. &8(Actuales: &f%current%&8; límite: &f%max%&8)"
+    Exceeding-limit-fixed: "&aYa cumples el límite. Tus protecciones fueron desbloqueadas."
+  Staff-mode:
+    Enabled-successfully: "&aModo staff activado."
+    Disabled-successfully: "&7Modo staff desactivado."
+    Enabled-successfully-other: "&aModo staff activado para &e{player}&a."
+    Disabled-successfully-other: "&7Modo staff desactivado para &e{player}&7."
+  Reset-flags:
+    Flags-set-to-default-successfully: "&aReglas restablecidas a sus valores predeterminados."
+  Flags:
+    Flag-set-successfully: "&aValor de la regla actualizado."
+    Flag-group-set-successfully: "&aGrupo de la regla actualizado."
+    Flag-cleared-successfully: "&aValor de la regla eliminado."
+  Guard:
+    Modified-successfully: "&aTiempo de protección actualizado: &e{time}&a."
+    Modified-unlimited-successfully: "&aTiempo de protección establecido sin límite."
+    Removed-successfully: "&aTiempo de protección retirado."
+  Player-data:
+    Auto-flight:
+      Enabled-successfully: "&aVuelo automático activado."
+      Disabled-successfully: "&7Vuelo automático desactivado."
+  Database-migration:
+    Migrated-successfully: "&aDatos migrados a la nueva base. Revisa el resultado antes de habilitarla para el próximo reinicio."
+Error:
+
   Error: "&cOcurrió un error."
   Console-denied: "&cEste comando no puede usarse desde la consola."
   Player-not-found: "&cNo se encontró al jugador indicado."
@@ -163,19 +285,20 @@ Error:
   Invalid-number: "&cDebes indicar un número válido."
   Number-below-zero: "&cDebes indicar un número igual o mayor que cero."
   Set-spawn-error: "&cNo se pudo establecer el punto de aparición. Revisa la consola."
-  
-  Chat-prompt: 
+
+  Chat-prompt:
     Already-prompted: "&cYa tienes una operación de escritura pendiente."
-  
-  Files: 
+
+  Files:
     Export: "&cNo se pudieron exportar los datos. Revisa la consola."
     Import: "&cNo se pudieron importar los datos. Revisa la consola."
-  
-  Purge: 
-    Invalid-parameter: "&cDebes indicar un parámetro válido: --days, --hours, --minutes, --config, --show-ignored-players o --export-only."
+
+  Purge:
+    Invalid-parameter: "&cDebes indicar un parámetro válido: --days, --hours, --minutes,
+      --config, --show-ignored-players o --export-only."
     No-value-for-parameter: "&cDebes indicar un valor para el parámetro."
-  
-  Protections: 
+
+  Protections:
     Not-found: "&cNo se encontró la protección indicada."
     Not-inside-protection: "&cNo estás dentro de una protección."
     Banned-world: "&cNo puedes usar bloques de protección en este mundo."
@@ -187,13 +310,227 @@ Error:
     Block-already-hidden: "&cEl bloque de protección ya está oculto."
     Block-already-shown: "&cEl bloque de protección ya está visible."
     Blocked-by-block: "&cHay otro bloque donde debería aparecer la protección."
-    Same-item-as-protection: "&cNo puedes colocar un bloque del mismo tipo en la posición original de la protección."
+    Same-item-as-protection: "&cNo puedes colocar un bloque del mismo tipo en la posición original
+      de la protección."
     Leave-denied-to-main-owner: "&cNo puedes abandonar tu propia protección."
-    Blocks: 
+    Blocks:
       Not-found: "&cNo existe un bloque de protección con ese ID."
       Not-for-sale: "&cEste bloque de protección no está a la venta."
-  
-  Commands: 
+
+    Not-owner-any-protection: "&cNo eres propietario de ninguna de las protecciones de esta ubicación."
+  Commands:
     Permission-denied: "&cNo tienes permiso para usar este comando."
     Pending-command: "&cTodavía tienes un comando en ejecución."
     Cooldown-active: "&cDebes esperar &e%seconds% segundos &cpara volver a usar este comando."
+  Reset-flags:
+    No-flags-found: "&cNo se encontraron reglas para restablecer."
+  Flags:
+    Not-found: "&cNo se encontró la regla indicada."
+    Invalid-group: "&cEl grupo indicado no es válido."
+    Invalid-Value: "&cEse valor no es válido para esta regla."
+  Exception:
+    protection:
+      databaseMigration:
+        InProgress: "&cYa hay una migración en curso. Espera a que termine."
+        InvalidOption: "&cElige una opción válida: &e{options}"
+        SQLiteInUse: "&cSQLite ya está en uso como base de datos."
+        MySQLInUse: "&cMySQL ya está en uso como base de datos."
+        UnableToCreateConnection: "&cNo se pudo crear la conexión. Revisa la configuración y la consola."
+        UnableToConnect: "&cNo se pudo conectar a la base de datos. Revisa la consola."
+        MigrationUnknownException: "&cNo se pudo completar la migración. Revisa la consola."
+      pendingPayments:
+        delete:
+          SQL: "&cNo se pudo eliminar el pago pendiente. Avísale al staff."
+        load:
+          SQL: "&cNo se pudo cargar los pagos pendientes. Avísale al staff."
+        save:
+          SQL: "&cNo se pudo guardar el pago pendiente. Avísale al staff."
+      kick:
+        Denied: "&cNo puedes expulsar a este jugador de esta protección."
+        DeniedBypass: "&cLos permisos de ese jugador impiden que lo expulses."
+      NotEnoughBalance: "&cNo tienes saldo suficiente para esta acción."
+      ProtectionBlocked: "&cEsta protección está bloqueada. No puedes modificarla."
+      PermissionDenied: "&cNo tienes permiso para realizar esta acción en esta protección."
+      NotFound: "&cNo se encontró la protección indicada."
+      InCombat: "&cNo puedes hacer esto mientras estás en combate."
+      PriorityTooHigh: "&cLa prioridad supera tu límite de &e{max}&c."
+      PriorityBelowZero: "&cLa prioridad debe ser un número igual o mayor que cero."
+      BlockAlreadyShown: "&cEl bloque de protección ya está visible."
+      BlockAlreadyShownMultiple: "&cTodos los bloques de esta protección ya están visibles."
+      BlockAlreadyHidden: "&cEl bloque de protección ya está oculto."
+      BlockAlreadyHiddenMultiple: "&cTodos los bloques de esta protección ya están ocultos."
+      BlockOverlaping: "&cNo puedes mostrar el bloque: su posición está ocupada por otro bloque."
+      BlockOverlapingMultiple: "&cNo puedes mostrar todos los bloques: una o más posiciones están ocupadas."
+      Unknown: "&cOcurrió un error inesperado. Avísale al staff."
+      Cancelled: "&cLa acción fue cancelada por otro sistema de protección."
+      StoreUnavailable: "&cLa tienda de protecciones no está disponible."
+      AlreadyPublic: "&cEsta protección ya es pública."
+      AlreadyPrivate: "&cEsta protección ya es privada."
+      RegenOnlyOnParent: "&cRegenera la región de WorldGuard desde la protección principal."
+      banneds:
+        delete:
+          PermissionDenied: "&cNo tienes permiso para desbloquear a este jugador."
+          Unknown: "&cNo se pudo desbloquear al jugador. Avísale al staff."
+        save:
+          CannotAddProtectionOwner: "&cNo puedes bloquear al propietario principal de la protección."
+          CannotAddYourself: "&cNo puedes bloquearte a ti mismo."
+          AlreadyBanned: "&cEse jugador ya está bloqueado en esta protección."
+          PermissionDenied: "&cNo tienes permiso para bloquear jugadores en esta protección."
+          Unknown: "&cNo se pudo bloquear al jugador. Avísale al staff."
+      owners:
+        delete:
+          SQL: "&cNo se pudo retirar al propietario. Avísale al staff."
+          CannotDeleteProtectionOwner: "&cNo puedes retirar al propietario principal de la protección."
+          PermissionDenied: "&cNo tienes permiso para retirar propietarios."
+          Unknown: "&cNo se pudo retirar al propietario. Avísale al staff."
+        save:
+          SQL: "&cNo se pudo añadir al propietario. Avísale al staff."
+          CannotAddProtectionOwner: "&cEse jugador ya es el propietario principal."
+          CannotAddYourself: "&cNo puedes añadirte como propietario."
+          PermissionDenied: "&cNo tienes permiso para añadir propietarios."
+          Unknown: "&cNo se pudo añadir al propietario. Avísale al staff."
+      blocks:
+        GenerateItem: "&cNo se pudo generar el objeto del bloque de protección. Avísale al staff."
+        delete:
+          PermissionDenied: "&cNo tienes permiso para eliminar este tipo de bloque de protección."
+          SQL: "&cNo se pudo eliminar el tipo de bloque de protección. Avísale al staff."
+          Unknown: "&cNo se pudo eliminar el tipo de bloque de protección. Avísale al staff."
+        save:
+          PermissionDenied: "&cNo tienes permiso para guardar este tipo de bloque de protección."
+          IdInUse: "&cYa existe un tipo de bloque con ese ID."
+          IdNull: "&cThere's no ID specified for this protection block!"
+          ItemNull: "&cThere's no item specified for this protection block!"
+          SQL: "&cNo se pudo guardar el tipo de bloque de protección. Avísale al staff."
+          Unknown: "&cNo se pudo guardar el tipo de bloque de protección. Avísale al staff."
+      delete:
+        NotFound: "&cNo se encontró la protección que intentas eliminar."
+        AlreadyDeleted: "&cThe requested protection to delete is already deleted!"
+        PermissionDenied: "&cNo tienes permiso para eliminar esta protección."
+        SQL: "&cNo se pudo eliminar la protección. Avísale al staff."
+        Unknown: "&cNo se pudo eliminar la protección. Avísale al staff."
+        CreationInProgress: "&cYou can't remove this protection while is being created!"
+        InProgress: "&cThere's already a removal of a protection in this location in progress!"
+        ViewActive: "&cDesactiva la visualización con &e/pb view &cantes de eliminar la protección."
+        BlockShown: "&cOculta el bloque de protección antes de eliminar la protección."
+        Cancelled: "&cLa eliminación fue cancelada por otro sistema de protección."
+      flags:
+        PermissionDenied: "&cNo tienes permiso para modificar esta regla."
+        NotEnoughBalance: "&cYou don't have enough balance to change this flag!"
+        NotFound: "&cNo se encontró la regla indicada."
+        Unknown: "&cNo se pudo modificar la regla. Avísale al staff."
+      flight:
+        PermissionDeniedProtection: "&cNo tienes permiso para volar en esta ubicación."
+        PermissionDenied: "&cNo tienes permiso para usar el comando de vuelo."
+      invitations:
+        InvitationBlocked: "&cEse jugador tiene desactivadas las invitaciones."
+        InvitationRequired: "&cDebes invitar a ese jugador antes de añadirlo."
+        NotInvited: "&cEse jugador no tiene una invitación a esta protección."
+        NotInvitedYourself: "&cNo tienes una invitación a esta protección."
+        AlreadyInvited: "&cEse jugador ya tiene una invitación a esta protección."
+        SaveSQL: "&cNo se pudo actualizar la invitación. Avísale al staff."
+        Unknown: "&cNo se pudo actualizar la invitación. Avísale al staff."
+      members:
+        delete:
+          PermissionDenied: "&cNo tienes permiso para retirar miembros."
+          SQL: "&cNo se pudo retirar al miembro. Avísale al staff."
+          Unknown: "&cNo se pudo retirar al miembro. Avísale al staff."
+        save:
+          Unauthorized: "&cNo puedes añadir a ese jugador."
+          CannotAddProtectionOwner: "&cEl propietario principal no puede añadirse como miembro."
+          CannotAddYourself: "&cNo puedes añadirte como miembro."
+          PermissionDenied: "&cNo tienes permiso para añadir miembros."
+          SQL: "&cNo se pudo añadir al miembro. Avísale al staff."
+          Unknown: "&cNo se pudo añadir al miembro. Avísale al staff."
+      merge:
+        DifferentOwners: "&cLas protecciones deben tener el mismo propietario principal."
+        DifferentWorlds: "&cLas protecciones deben estar en el mismo mundo."
+        TooFar: "&cLas áreas deben compartir un límite o superponerse para fusionarse."
+        SameProtection: "&cNo puedes fusionar una protección consigo misma."
+        ChildProtection: "&cNo puedes fusionar una protección con una de sus dependientes."
+        AlreadyMerged: "&cEsta protección ya está fusionada con la indicada."
+        NotMerged: "&cEsta protección no está fusionada con otra."
+        Disabled: "&cLa fusión de protecciones está desactivada."
+      permissions:
+        PermissionDenied: "&cNo tienes permiso para modificar este permiso de la protección."
+        NotEnoughBalance: "&cNo tienes saldo suficiente para cambiar este permiso."
+        NotFound: "&cNo se encontró el permiso indicado."
+        NotEditable: "&cEste permiso no se puede editar."
+        NotEditableGroup: "&cLos permisos de este grupo no se pueden editar."
+        InvalidGroup: "&cElige un grupo válido: &7{options}"
+        SQL: "&cNo se pudo guardar el permiso. Avísale al staff."
+        Unknown: "&cNo se pudo guardar el permiso. Avísale al staff."
+      purchase:
+        NotForSale: "&cEsta protección no está en venta."
+        AlreadyNotForSale: "&cEsta protección ya está fuera de venta."
+        SameOwner: "&cNo puedes comprar tu propia protección."
+        MaxReached: "&cAlcanzaste tu límite de protecciones y no puedes comprar otra."
+        BlockMaxReached: "&cAlcanzaste el límite de protecciones de este tipo de bloque."
+        NotEnoughBalance: "&cNo tienes saldo suficiente para comprar esta protección."
+      save:
+        AlreadyExists: "&cYa existe una protección con ese ID."
+        PermissionDenied: "&cNo tienes permiso para guardar esta protección."
+        PermissionDeniedProtectionBlock: "&cNo tienes permiso para usar este bloque de protección."
+        NotAllowedWorld: "&cEste bloque de protección no puede usarse en este mundo."
+        BannedWorld: "&cNo puedes colocar bloques de protección en este mundo."
+        MaxReached: "&cAlcanzaste tu límite de protecciones."
+        BlockMaxReached: "&cAlcanzaste el límite de protecciones de este tipo de bloque."
+        NameInUse: "&cYa existe una protección con ese nombre."
+        NameTooLong: "&cEl nombre es demasiado largo. &8(Longitud: &f{current}&8; máximo: &f{max}&8)"
+        Overlaps: "&cNo puedes colocar esta protección dentro de otra."
+        OverlapsOffset: "&cDebes mantener una separación de &e%offset% bloques &crespecto de otras protecciones."
+        OverlapsWorldguard: "&cNo puedes colocar una protección en esta región protegida."
+        AlreadyOccupied: "&cYa hay una protección en esta ubicación."
+        SQL: "&cNo se pudo guardar la protección. Avísale al staff."
+        Unknown: "&cNo se pudo guardar la protección. Avísale al staff."
+        NoVisibleText: "&cEl nombre debe contener texto visible."
+        InProgress: "&cYa se está creando una protección en esta ubicación."
+        Cancelled: "&cLa creación fue cancelada por otro sistema de protección."
+      settings:
+        PermissionDenied: "&cNo tienes permiso para modificar este ajuste."
+        NotEnoughBalance: "&cNo tienes saldo suficiente para cambiar este ajuste."
+        NotFound: "&cNo se encontró el ajuste indicado."
+        NotEditable: "&cEste ajuste no se puede editar."
+        InvalidValue: "&cEse valor no es válido para este ajuste."
+        InvalidGroup: "&cElige un grupo válido: &7{options}"
+        SQL: "&cNo se pudo guardar el ajuste. Avísale al staff."
+        Unknown: "&cNo se pudo guardar el ajuste. Avísale al staff."
+      teleport:
+        NoHomeSet: "&cEsta protección no tiene un punto de teletransporte establecido."
+        CooldownActive: "&cEspera &e%seconds% segundos &cpara volver a teletransportarte."
+        Unknown: "&cNo se pudo completar el teletransporte. Avísale al staff."
+        CancelledDueMovement: "&cTeletransporte cancelado porque te moviste."
+        Unsafe: "&cEl destino no es seguro. Establece el punto de teletransporte en un lugar seguro."
+      transfer:
+        SameOwner: "&cEse jugador ya es el propietario de la protección."
+        MaxReached: "&cEse jugador ya alcanzó su límite de protecciones."
+        BlockMaxReached: "&cEse jugador ya alcanzó el límite de protecciones de uno de estos tipos de bloque."
+      ReadOnly: "&#FF3300No puedes modificar protecciones desde este servidor: están en modo de solo lectura."
+    PlayerNotFound: "&cNo se encontró al jugador indicado."
+    PlayerNotOnline: "&cEse jugador no está conectado."
+    playerGuards:
+      SQL: "&cNo se pudo actualizar el tiempo de protección del jugador. Avísale al staff."
+  No-time-specified: "&cIndica una duración válida."
+  Unavailable-store: "&cEsta tienda no está disponible."
+Placeholder:
+  Common:
+    Allowed: "Permitido"
+    Denied: "Denegado"
+    Member: "Miembro"
+    Owner: "Propietario"
+    Main-owner: "Propietario principal"
+    True: "Sí"
+    False: "No"
+  Roles:
+    Forager: "Visitante"
+Inventory:
+  Protection:
+    Settings:
+      True-value-name: "&aActivado"
+      False-value-name: "&cDesactivado"
+      String-value-name: "&b{text}"
+      Not-defined-name: "&7Sin definir"
+      Numeric-value-name: "&b{number}"
+      Unknown-value-name: "&7???"
+    Flags:
+      Numeric-value-name: "&b{number}"
+      Unknown-value-name: "&7???"

@@ -63,7 +63,7 @@ Items:
       - "&8⏺ &7Conectados"
       - "&8⏺ &7Desconectados"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
   Online-filter-button:
     Display-item:
@@ -77,7 +77,7 @@ Items:
       - "&#00FB9A⏺ &aConectados"
       - "&8⏺ &7Desconectados"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
   Offline-filter-button:
     Display-item:
@@ -91,7 +91,7 @@ Items:
       - "&8⏺ &7Conectados"
       - "&#00FB9A⏺ &aDesconectados"
       - ""
-      - "&#FFD166→ Click para cambiar filtro"
+      - "&#FFD166→ Haz clic para cambiar filtro"
     Slots: "52"
   Close-button:
     Display-item:
